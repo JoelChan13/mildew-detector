@@ -128,11 +128,13 @@ No direct ML task for this requirement as it focuses on visual analysis rather t
 
 - Dashboard Component: Text descriptions, dataset summary tables, and project objective outlines.
 
+
 2) Visual Differentiation Page:
 
 - Purpose: Display the results of the study that differentiates between healthy and infected leaves.
 
 - Dashboard Component: Includes average images, difference images, variability heatmaps, and image montages.
+
 
 3) Prediction Interface:
 
@@ -140,11 +142,13 @@ No direct ML task for this requirement as it focuses on visual analysis rather t
 
 - Dashboard Component: File uploader widget, image display, prediction output, and downloadable results table.
 
+
 4) Hypothesis Validation Page:
 
 - Purpose: Outline the hypotheses tested and how they were validated.
 
 - Dashboard Component: Textual explanations and visual evidence supporting the hypothesis conclusions.
+
 
 5) Technical Model Performance Page:
 

@@ -16,7 +16,7 @@ def page_summary_body():
         f" Several leaves, infected and healthy, were picked and examined."
         f"\nVisual criteria used to detect infected leaves are:\n\n"
         f"* Porraceous green lesions on either leaf surface which progresses to\n "
-        f"* white or grayish powdery spots which develop in the infected area on leaves and fruits ."
+        f"* white or grayish powdery spots which develop in the infected area on leaves and fruits."
         f" \n\n")
 
     st.warning(

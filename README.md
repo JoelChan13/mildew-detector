@@ -38,11 +38,11 @@ By meeting these requirements, the project will enable Farmy & Foods to maintain
 1. **Hypothesis 1**: Visual Differentiation of Cherry Leaves - There are distinct visual differences between healthy cherry leaves and those affected by powdery mildew that can be identified through image analysis.
    - __How to validate__: This hypothesis can be tested by conducting a study that involves analyzing average images, variability images, and creating image montages for both healthy and powdery mildew-affected leaves. If the differences are visually apparent and consistent, this would support the hypothesis. The analysis will include identifying specific visual markers or patterns that distinguish healthy leaves from those affected by powdery mildew.<br/>
 
-2. **Hypothesis 2**: Predictive Capability of Machine Learning Model - A machine learning model (e.g., Convolutional Neural Network) can be trained to accurately predict whether a cherry leaf is healthy or affected by powdery mildew, with a target accuracy of at least 97%.
-   - __How to validate__: This hypothesis will be validated by training a machine learning model on the cherry leaf images and then evaluating its performance on a separate test set. The model's accuracy, precision, recall, and F1-score will be used as metrics to determine its effectiveness. If the model achieves an accuracy of 97% or higher on the test set, the hypothesis will be considered validated. <br/>
+2. **Hypothesis 2**: Comparison of Mathematical Functions - The `softmax` function performs better than the `sigmoid` function as an activation function for the CNN output layer.
+   - __How to validate__:  <br/>
 
-3. **Hypothesis 3**: Generalization Across Cherry Plantations - The trained machine learning model can generalize well across cherry leaves from different farms and plantations, detecting powdery mildew consistently despite variations in environmental conditions.  
-   - __How to validate__: This can be tested by ensuring the training dataset includes diverse samples from various farms, and then evaluating the model's performance across these different sources. If the model maintains high accuracy and performs consistently across different test samples, this hypothesis will be supported.
+3. **Hypothesis 3**: Use of ```RGB``` images for classification - Cherry leaf images converted from ```grayscale``` to ```RGB``` allow for an improved image classification performance.
+   - __How to validate__: 
 
 
 ## The rationale for the model

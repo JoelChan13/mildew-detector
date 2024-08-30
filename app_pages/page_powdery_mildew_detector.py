@@ -16,7 +16,7 @@ def page_powdery_mildew_detector_body():
         )
 
     st.write(
-        f"* You can download a set of infected and healthy leaves for live prediction from [here](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves).")
+        f"*You can download a set of infected and healthy leaves for live prediction from [here](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves).")
 
     st.write("---")
     

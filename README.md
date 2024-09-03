@@ -1,18 +1,18 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# ![Mildew Detector Logo](https://github.com/JoelChan13/mildew-detector/blob/main/readme_images/mildew_detector_logo.png)
 
 ## Table of Contents
 1. [Dataset Content](#dataset-content)
 2. [Business Requirements](#business-requirements)
-3. [Hypothesis and validation](#hypothesis-and-validation)
-4. [Rationale for the model](#the-rationale-for-the-model)
-5. [Trial and error](#trial-and-error)
-6. [Implementation of the Business Requirements](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
-7. [ML Business case](#ml-business-case)
-8. [Dashboard design](#dashboard-design-streamlit-app-user-interface)
-9. [CRISP DM Process](#the-process-of-cross-industry-standard-process-for-data-mining)
+3. [Hypothesis and Validation](#hypothesis-and-validation)
+4. [Rationale for the Model](#rationale-for-the-model)
+5. [Trial and Error](#trial-and-error)
+6. [The Rationale to Map the Business Requirements to the Data Visualizations and ML Tasks](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
+7. [ML Business Case](#ml-business-case)
+8. [Dashboard Design](#dashboard-design)
+9. [CRISP DM Process](#crisp-dm-process)
 10. [Bugs](#bugs)
 11. [Deployment](#deployment)
-12. [Technologies used](#technologies-used)
+12. [Technologies Used](#technologies-used)
 13. [Credits](#credits)
 
 ### Deployed version at [cherry-powdery-mildew-detector.herokuapp.com](https://cherry-powdery-mildew-detector.herokuapp.com/)
@@ -33,7 +33,7 @@ The primary objective of this project is to develop a Machine Learning system th
 
 By meeting these requirements, the project will enable Farmy & Foods to maintain product quality and meet market demands effectively through large-scale automated detection.
 
-## Hypothesis and Validation?
+## Hypothesis and Validation
 
 1. **Hypothesis 1**: Visual Differentiation of Cherry Leaves - There are distinct visual differences between healthy cherry leaves and those affected by powdery mildew that can be identified through image analysis.
    - __How to validate__: This hypothesis can be tested by conducting a study that involves analyzing average images, variability images, and creating image montages for both healthy and powdery mildew-affected leaves. If the differences are visually apparent and consistent, this would support the hypothesis. The analysis will include identifying specific visual markers or patterns that distinguish healthy leaves from those affected by powdery mildew.<br/>
@@ -45,7 +45,7 @@ By meeting these requirements, the project will enable Farmy & Foods to maintain
    - __How to validate__: 
 
 
-## The rationale for the model
+## Rationale for the Model
 
 ## Trial and Error
 
@@ -160,7 +160,7 @@ No direct ML task for this requirement as it focuses on visual analysis rather t
 
 ## Dashboard Design
 
-## The Process of CRISP-DM
+## CRISP-DM Process
 
 ## Bugs
 
@@ -183,7 +183,31 @@ No direct ML task for this requirement as it focuses on visual analysis rather t
 
 ## Technologies Used
 
-- Here, you should list the libraries used in the project and provide an example(s) of how you used these libraries.
+### Platforms
+- [Heroku](https://en.wikipedia.org/wiki/Heroku) To deploy project
+- [Jupiter Notebook](https://jupyter.org/) Edit project code
+- [Kaggle](https://www.kaggle.com/) Download project datasets
+- [GitHub](https://github.com/): Store project code after pushing from GitPod.
+- [Gitpod](https://www.gitpod.io/) Used to write project code and push code to GitHub.
+
+### Languages
+- [Python](https://www.python.org/)
+- [Markdown](https://www.markdownguide.org/getting-started/)
+  
+### Main Data Analysis and Machine Learning Libraries
+<pre>
+- tensorflow-cpu 2.6.0  used to create the model
+- numpy 1.19.2          used to convert to array 
+- scikit-learn 0.24.2   used to evaluate the model
+- streamlit 0.85.0      used to create the dashboard
+- pandas 1.1.2          used to create/save as dataframe
+- matplotlib 3.3.1      used to plot the sets' distribution
+- keras 2.6.0           used to set model hyperparameters
+- plotly 5.12.0         used to plot model's learning curve 
+- seaborn 0.11.0        used to plot model's confusion matrix
+- streamlit             used to create and share project interface
+</pre>
+
 
 ## Credits
 

@@ -15,11 +15,6 @@ def page_leaves_visualiser_body():
     st.info(
         f"A comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.")
 
-    # Provide a link to the project's README file for additional information
-    st.write(
-        f"For additional information, please visit and **read** the "
-        f"[Project README file](https://github.com/JoelChan13/mildew-detector/blob/main/README.md).")
-
     # Display a warning message with detailed information about the symptoms of powdery mildew and the need for image normalization
     st.warning(
         f"We believe cherry leaves affected by powdery mildew show distinct symptoms.\n\n" 
@@ -65,7 +60,7 @@ def page_leaves_visualiser_body():
 
     # Checkbox to show an image montage of selected label
     if st.checkbox("Image Montage"): 
-      st.write("To refresh the montage, click on the 'Create Montage' button")
+      st.write("To refresh the montage, click on 'Create Montage'")
       # Directory where image data is stored
       my_data_dir = 'inputs/cherryleaves_dataset/cherry-leaves'
       # List of labels (directories) in the validation dataset
@@ -128,3 +123,9 @@ def image_montage(dir_path, label_to_display, nrows, ncols, figsize=(15,10)):
   else:
     print("The label you selected doesn't exist.")
     print(f"The existing options are: {labels}")
+
+
+    # Provide a link to the project's README file for additional information
+    st.write(
+        f"For additional information, please visit and **read** the "
+        f"[Project README file](https://github.com/JoelChan13/mildew-detector/blob/main/README.md).")

@@ -12,7 +12,7 @@ from src.machine_learning.predictive_analysis import (
 
 def page_powdery_mildew_detector_body():
     st.info(
-        f"Upload pictures of cherry leaves to identify whether it is healthy or infected with powdery mildew. You can download a report of the examined leaves."
+        f"Upload pictures of cherry leaves to determine whether the leaf is healthy or infected with powdery mildew. A report of the examined leaves will be available for download."
         )
 
     # Provide a link to download a dataset of infected and healthy leaves for testing

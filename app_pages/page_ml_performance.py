@@ -6,22 +6,26 @@ from src.machine_learning.evaluate_clf import load_test_evaluation
 
 def page_ml_performance_metrics():
     version = 'v1'
+    st.info(
+        f"This page presents an easy-to-understand summary of the dataset's division, the model's performance on it, and"
+        f" a concise explanation of the outcomes. "
+    )
     st.write("### Images Distribution per Set & Label ")
 
     # Load and display the image for labels distribution across train, validation, and test sets
-    labels_distribution = plt.imread(f"")
+    labels_distribution = plt.imread(f"outputs/alfa/number_leaves_sets.png")
     st.image(labels_distribution, caption='Labels Distribution on Train, Validation and Test Sets')
 
     # Load and display the image for overall sets distribution
-    labels_distribution = plt.imread(f"")
+    labels_distribution = plt.imread(f"outputs/{version}/sets_distribution_pie.png")
     st.image(labels_distribution, caption='Sets Distribution')
 
     # Warning message explaining the dataset split into train, validation, and test sets
     st.warning(
-        f"The cherry leaves dataset was divided into three subsets.\n\n"
-        f"Train set (70% of dataset) used to 'fit' the model in order to obtain an initial baseline on which the model will be able to generalise and make predictions.\n\n"
-        f"Validation set (10% of dataset) used as a means to refine the model after epochs.\n\n"
-        f"The test set (20% of dataset) used to determine the accuracy of the model following the training phase.")
+        f"The cherry leaves dataset was divided into three subsets:\n\n"
+        f"A training set (70% of the data) to train the model and create an initial baseline for generalization and prediction.\n\n"
+        f"A validation set (10% of the data) to adjust the model after each epoch\n\n"
+        f"A test set (20% of the data) to assess the model accuracy after the training phase.")
     st.write("---")
 
     st.write("### Model Performance")
@@ -66,13 +70,20 @@ def page_ml_performance_metrics():
         f"High TP and TN rates, with low FP and FN rates are indicatives of a good model.")
 
     # Load and display the model performance image
-    model_perf = plt.imread(f"")
+    model_perf = plt.imread(f"outputs/alfa/model_history.png")
     st.image(model_perf, caption='Model Performance')  
 
     # Warning message for model performance 
     st.warning(
         f"**Model Performance**\n\n"
-        f"")
+        f"Model performance in machine learning refers to how well a model makes predictions or classifications based on the input data.\n\n"
+        f"It is typically evaluated using metrics such as accuracy, precision, recall, F1 score, and area under the ROC curve, depending on the type of problem being solved.\n\n"
+        f"High performance indicates that the model accurately captures patterns in the data and generalizes well to new, unseen data.\n\n"
+        f"Poor performance suggests that the model may be overfitting to the training data or underfitting, meaning it is too simple to capture the underlying patterns.\n\n"
+        f"Val_loss (Validation Loss): Validation loss measures the error of the model's predictions on the validation set.\n\n"
+        f"Accuracy: Accuracy is the ratio of correctly predicted instances to the total instances in the dataset. It is a measure of how well the model's predictions match the actual labels in the dataset.\n\n"
+        f"Val_acc (Validation Accuracy): Validation accuracy measures the proportion of correct predictions made by the model on the validation set, which is separate from the training data. This metric helps in understanding how well the model is generalizing beyond the training data.\n\n"
+        f"Monitoring and improving model performance is crucial for deploying reliable and effective machine learning solutions.")
 
     st.write("### Generalised Performance on Test Set")
     st.dataframe(pd.DataFrame(load_test_evaluation(version), index=['Loss', 'Accuracy']))

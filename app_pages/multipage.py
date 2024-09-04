@@ -23,7 +23,9 @@ class MultiPage:
     def run(self):
         # Set the main title of the app to the app name
         st.title(self.app_name)
-        # Set sidebar radio button menu to select the page & displays the titles of the pages and returns the selected page
-        page = st.sidebar.radio('Menu', self.pages, format_func=lambda page: page['title'])
+        # Display titles of pages and returns the selected page
+        page = st.sidebar.radio(
+            'Menu', self.pages,
+            format_func=lambda page: page['title'])
         # Call the function of the selected page to display its content
         page['function']()

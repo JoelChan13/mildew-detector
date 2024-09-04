@@ -138,6 +138,88 @@ Sources:
 
 ## Rationale for the Model
 
+### The goal
+
+A good machine learning model is one that generalizes well from the training data to unseen data. This means that the model captures the underlying patterns in the data without overfitting, which occurs when a model performs well on training data but poorly on new, unseen data. Such a model achieves a balance between bias and variance, avoiding being too simple (high bias) or too complex (high variance). It should have a high accuracy on both training and validation datasets, indicating that it can make correct predictions consistently. Additionally, the model should have low error rates, such as low mean squared error for regression tasks or low classification error for classification tasks.
+
+Scalability and efficiency are also important, meaning the model should be able to handle large datasets and make predictions in a reasonable time. Interpretability is another key factor, especially in applications where understanding the model's decisions is critical. A good model is robust, meaning it can handle noisy or missing data and still perform well, and it should be stable, producing consistent results across different subsets of the data or when retrained.
+
+A trial and error approach was chosen in order to determine the hyperparameters, the number of hidden layers and nodes, and which optimizer to opt for. From the trials conducted, it was determined that the model has 1 input layer, 3 hidden layers (2 ConvLayer, 1 FullyConnected), 1 output layer.
+
+### Choosing the hyperparameters
+
+- **Convolutional layer size**
+
+The convolutional layer size in machine learning refers to the dimensions of the filters (kernels) used in a Convolutional Neural Network (CNN). These filters slide over the input data (e.g., an image) to detect patterns, such as edges or textures. The filter size is typically specified as a small matrix, like 3x3 or 5x5, indicating how many pixels the filter covers at once. Smaller filters capture fine details, while larger filters capture broader patterns. The depth of the filter corresponds to the number of channels in the input data, such as the RGB channels in a color image. The output of the convolutional layer is a feature map, which highlights the presence of specific features in different locations. The convolutional layer size impacts the model's ability to detect different levels of detail and affects computational efficiency.
+
+Using a two-dimensional CNN (Conv2D) is more appropriate for pictures of healthy and infected cherry leaves because these images have two spatial dimensions: width and height. A Conv2D layer can effectively capture patterns, like edges, textures, and shapes, by sliding filters over these two dimensions, which is crucial for analyzing the visual features of the leaves. In contrast, a 1D convolution layer is designed for data with a single spatial dimension, like time series or sequential data, where the structure only varies along one axis. Applying 1D convolution to images would ignore the two-dimensional nature of the data, making it ineffective at capturing the spatial relationships necessary for image analysis. Hence, Conv2D was deemed to be the most appropriate choice for processing 2D images like those in our dataset.
+
+- **Convolutional kernel size**
+
+ A 3x3 filter slides over the image in both the x and y directions (width and height), capturing local patterns like edges or textures. The stride of 1 means the filter moves one pixel at a time, ensuring detailed analysis of the image. The choice of a 3x3 filter is preferred over a 2x2 filter because a 2x2 filter would not allow the use of zero padding (adding extra pixels around the edges) without causing issues, especially with even-sized images, potentially leading to a loss of information at the borders. Compared to a 5x5 filter, the 3x3 filter is smaller, allowing it to focus more on fine details, which is important for identifying subtle signs of disease in the leaves. The third dimension of the filter corresponds to the color channels of the image (e.g., RGB), ensuring the filter captures features across all color layers.
+
+- **Number of neurons**
+
+The number of neurons in a machine learning model, particularly in the hidden layers, is determined based on the complexity of the task and the amount of data available. For distinguishing healthy cherry leaves from those infected with powdery mildew, the model needs enough neurons to capture the essential features of the images, such as textures and color patterns. However, too many neurons can lead to overfitting, where the model memorizes the training data but fails to generalize to new data. Conversely, too few neurons might result in underfitting, where the model cannot capture the necessary patterns. A common approach is to start with a small number of neurons and gradually increase them, monitoring the model's performance on a validation set. Powers of two (e.g., 16, 32, 64) are often used due to computational efficiency, which is why it was also chosen for the scope of this ML model.
+
+- **Activation function**:
+
+ReLu was chosen as an activation function due to several benefits in training deep neural networks.ReLU (Rectified Linear Unit) is a popular activation function in deep learning because of its simplicity and efficiency. Unlike the sigmoid activation, which squashes inputs into a small range between 0 and 1, ReLU outputs the input directly if it's positive, and zero otherwise. This non-linear property allows ReLU to introduce non-linearity into the model, enabling it to learn complex patterns. ReLU is computationally efficient since it requires only a simple thresholding operation. Its derivative is 1 for positive inputs and 0 for negative inputs, which helps prevent the vanishing gradient problem—a common issue with sigmoid where gradients become too small, slowing down or stalling learning in deep networks. ReLU’s ability to maintain stronger gradients during backpropagation leads to faster and more reliable convergence, making it highly effective in training deep neural networks.
+
+- **Pooling**
+
+Pooling is a technique used in neural networks to reduce the dimensionality of feature maps, which helps to minimize computational load and control overfitting. It works by summarizing the presence of features within a local region, allowing the network to maintain important information while discarding less critical details. MaxPooling was chosen for the mildew detector because it effectively highlights the most prominent features in an image. In MaxPooling, the pooling layer takes a window (e.g., 3x3) and selects the maximum pixel value within that window. This operation helps retain the most significant features while reducing the image size and computational complexity. Since the background of the cherry leaf images is dark green, MaxPooling focuses on the lighter pixels where the powdery mildew, which is white, appears. By concentrating on these brighter areas, MaxPooling enhances the visibility of the mildew spots relative to the dark background. This approach helps the model more effectively distinguish the disease from the background, improving overall detection accuracy.
+
+- **Output Activation Function**
+
+Output activation functions are crucial in machine learning and deep neural networks as they determine how the model's predictions are scaled and interpreted. For classification tasks, the choice of activation function impacts the model's ability to output probabilities and make accurate predictions.
+
+Softmax is used in multiclass classification problems. It converts raw scores (logits) into probabilities by exponentiating the scores and normalizing them so that they sum to 1. This makes it ideal for distinguishing between multiple classes, as it provides a probability distribution across all classes, helping the model to choose the most likely class. Softmax also ensures that the outputs are normalized, which can stabilize training and improve performance in complex classification tasks.
+
+Sigmoid, on the other hand, is used in binary classification. It outputs probabilities between 0 and 1 for a single class, making it suitable for problems where each instance belongs to only one of two classes. However, in a multiclass setting, using sigmoid would require a separate output neuron for each class, each producing an independent probability, which may not effectively capture the mutual exclusivity of the classes.
+
+In our model for detecting powdery mildew on cherry leaves, softmax performed better than sigmoid because it handled the multiclass nature of the problem more effectively. It reduced the gap between training and validation sets and provided a more consistent learning rate by correctly interpreting the multi-class output. Softmax helps in distinguishing between healthy leaves and those with different infection levels by providing a clear probabilistic ranking of each class, which improves the model’s accuracy and robustness in identifying and predicting the presence of mildew.
+
+- **Dropout**
+
+Dropout is a regularization technique used in CNN and other machine learning models to prevent overfitting. During training, dropout randomly deactivates a percentage of neurons in a layer, forcing the model to learn more robust and generalized features by not relying too heavily on any single neuron. This helps in reducing the chance that the model memorizes the training data instead of generalizing from it.
+
+In the context of our project, applying a 20% dropout rate helps to mitigate overfitting, especially given the relatively small number of training samples. This means that during each training iteration, 20% of the neurons in the dropout layers are randomly turned off, which encourages the network to develop multiple redundant representations of the data. As a result, the model becomes more capable of generalizing to new, unseen data.
+
+If dropout layers were not included, the model might overfit to the training data, meaning it would perform well on the training set but poorly on new, unseen data. This is because the model might learn to memorize specific patterns in the training samples rather than learning general features applicable to the broader dataset. Consequently, the absence of dropout could lead to reduced model performance and less reliable predictions in real-world scenarios.
+
+**Source**: 
+- [Deep Learning and Convolutional Neural Networks for Medical Imaging and Clinical Informatics](https://books.google.com.mt/books/about/Deep_Learning_and_Convolutional_Neural_N.html?id=hM2wDwAAQBAJ&source=kp_book_description&redir_esc=y) by - Le Lu, Xiaosong Wang, Gustavo Carneiro, Lin Yang
+- [Hands-on Machine Learning with Scikit-Learn and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems](https://books.google.com.mt/books/about/Hands_on_Machine_Learning_with_Scikit_Le.html?id=I6qkDAEACAAJ&source=kp_book_description&redir_esc=y) by Aurélien Géron
+
+### Hidden Layers
+
+Hidden layers in a neural network are called "hidden" because their internal workings and values are not directly observable from the input or output; they operate between these layers to transform and process the data.
+
+Convolutional Layers are used for feature extraction from images. They apply convolutional filters to input data to detect features such as edges or textures while reducing the dimensionality and computational complexity by sharing parameters across different parts of the image. This approach efficiently captures spatial hierarchies in the data, crucial for identifying patterns like powdery mildew spots on cherry leaves.
+
+Dense (Fully Connected) Layers are used in the final stages of the model. They perform classification by connecting every neuron from the previous layer to each neuron in the dense layer. This layer combines the features extracted by convolutional layers to make predictions. The dense layer's ability to learn complex decision boundaries makes it suitable for classification tasks, where it converts the extracted features into final class probabilities.
+
+The choice of using convolutional layers for feature extraction followed by dense layers for classification is effective because it allows the model to first capture and learn essential patterns from the data and then use these patterns to make precise classifications. This combination leverages the strengths of both types of layers: convolutional layers for spatial feature learning and dense layers for decision-making based on these features.
+
+**Source**: 
+- [Convolutional Neural Networks: A Comprehensive Guide](https://medium.com/thedeephub/convolutional-neural-networks-a-comprehensive-guide-5cc0b5eae175) by - Jorgecardete
+
+### Model Compilation
+
+Loss functions quantify how far the model's predictions are from the actual values. In multiclass classification, categorical_crossentropy calculates the discrepancy between the predicted probability distribution and the true distribution.
+In the model compilation for the powdery mildew detector, categorical_crossentropy was used as the loss function because the problem involves multiclass classification. This loss function, also known as Softmax Loss, measures how well the predicted class probabilities align with the actual class labels. It works with the softmax activation function to produce a probability distribution across all classes, which is essential for accurately classifying the leaves into multiple categories (healthy or infected).
+
+Optimizers adjust the model's weights to minimize the loss function. They use gradients computed during backpropagation to update the weights, thereby improving model accuracy over time. AdaGrad, in particular, is effective for dealing with varying feature scales and sparse data. In view of this, AdaGrad was chosen as the optimizer during the trial and error phase because it adapts the learning rate based on the frequency of parameter updates. This means that parameters which frequently receive updates have their learning rates decreased, while those receiving fewer updates have their learning rates increased. This adaptation helps in efficiently navigating the loss landscape, especially in sparse or noisy data scenarios.
+
+Accuracy is used as a metric to measure the proportion of correct predictions (where y_pred matches y_true) out of the total predictions made. This metric is important because it provides a straightforward measure of how well the model is performing in distinguishing between healthy and infected cherry leaves. Accuracy helps to gauge the overall effectiveness of the model by reflecting its ability to correctly classify instances.
+
+The use of accuracy is particularly relevant when the class distribution is balanced, as it indicates how often the model's predictions align with the true labels. However, in cases of imbalanced classes, where some classes are more frequent than others, accuracy might be misleading. In such scenarios, additional metrics like precision, recall, and F1-score might be used to gain a more nuanced understanding of model performance.
+
+**Source**: 
+- [Hands-on Machine Learning with Scikit-Learn and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems](https://books.google.com.mt/books/about/Hands_on_Machine_Learning_with_Scikit_Le.html?id=I6qkDAEACAAJ&source=kp_book_description&redir_esc=y) by Aurélien Géron
+- [Keras Accuracy Metrics](https://keras.io/api/metrics/accuracy_metrics/#:~:text=metrics.,with%20which%20y_pred%20matches%20y_true%20.)
+
 ## Trial and Error
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks

@@ -9,6 +9,7 @@ from matplotlib.image import imread
 import itertools
 import random
 
+
 def page_leaves_visualiser_body():
     # Display the title and description of the page
     st.write("### Leaves Visualiser")

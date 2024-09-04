@@ -15,7 +15,7 @@
 12. [Technologies Used](#technologies-used)
 13. [Credits](#credits)
 
-### Deployed version at [cherry-powdery-mildew-detector.herokuapp.com](https://cherry-powdery-mildew-detector.herokuapp.com/)
+### Deployed version at [Mildew Detector]()
 
 ## Dataset Content
 
@@ -28,7 +28,7 @@ Dataset Source From [Kaggle](https://www.kaggle.com/datasets/codeinstitute/cherr
 The primary objective of this project is to develop a Machine Learning system that aids Farmy & Foods in addressing the issue of powdery mildew affecting their cherry plantations. Currently, the process is manual verification if a given cherry tree contains powdery mildew. An employee spends around 30 minutes in each tree, taking a few samples of tree leaves and verifying visually if the leaf tree is healthy or has powdery mildew. If there is powdery mildew, the employee applies a specific compound to kill the fungus. The time spent applying this compound is 1 minute. Due to this fact, manually inspecting all plants is not scalable, the client has outlined the following specific business requirements:
 
 1. Visual Differentiation: Conduct a comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
-2. Predictive Modeling: Implement a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis, with an accuracy target of 97%.
+2. Predictive Modeling: Implement a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis, ideally with an accuracy target of not less than 97%.
 3. Interactive Dashboard: Develop an interactive dashboard that allows users to upload cherry leaf images, receive predictions, and review the analysis results.
 
 By meeting these requirements, the project will enable Farmy & Foods to maintain product quality and meet market demands effectively through large-scale automated detection.
@@ -39,10 +39,101 @@ By meeting these requirements, the project will enable Farmy & Foods to maintain
    - __How to validate__: This hypothesis can be tested by conducting a study that involves analyzing average images, variability images, and creating image montages for both healthy and powdery mildew-affected leaves. If the differences are visually apparent and consistent, this would support the hypothesis. The analysis will include identifying specific visual markers or patterns that distinguish healthy leaves from those affected by powdery mildew.<br/>
 
 2. **Hypothesis 2**: Comparison of Mathematical Functions - The `softmax` function performs better than the `sigmoid` function as an activation function for the CNN output layer.
-   - __How to validate__:  <br/>
+   - __How to validate__:  This hyptothesis can be tested by understanding the type of problem we are trying to solve, and training and comparing the models, modifying only the activation function in the output layer. This will enable us to identify which model produces more accurate results.<br/>
 
-3. **Hypothesis 3**: Use of ```RGB``` images for classification - Cherry leaf images converted from ```grayscale``` to ```RGB``` allow for an improved image classification performance.
-   - __How to validate__: 
+3. **Hypothesis 3**: ```RGB``` images perform better than ```grayscale```  in terms of image classification performance.
+   - __How to validate__: This hypothesis can be tested by training and comparing the models, modifying only the image colour, which will enable us to identify which model produces more accurate results, along with the margin of difference in accuracy.<br/>
+
+### Hypothesis 1
+> There are distinct visual differences between healthy cherry leaves and those affected by powdery mildew that can be identified through image analysis.
+
+**1. Introduction**
+
+We believe cherry leaves infected with powdery mildew have distinct visual traits that set them apart from healthy leaves. Infected leaves typically display a white or grayish powdery coating on their surfaces, caused by the fungal spores. This powdery layer is often found on the upper side of the leaves but can also appear on the underside. Healthy cherry leaves, on the other hand, are usually uniformly green, smooth, and free from any powdery residue or discolouration. The contrast in appearance makes it easier to identify and distinguish between infected and healthy leaves. In order to prove this hypothesis, the above-mentioned distinct traits need to be converted into tensors in order for the ML model to make use of them when training and evaluating.
+
+- Understand the Problem & Mathematical Functions
+
+Normalizing images in a dataset before training a neural network is crucial for several reasons. First, it ensures that all pixel values are on a similar scale, typically between 0 and 1 or -1 and 1, which helps the model converge faster during training. Without normalization, the network might struggle with varying scales of pixel values, leading to inefficient learning. It also prevents any particular feature from dominating the training process, ensuring that the model pays equal attention to all features. Normalization improves numerical stability, reducing the risk of exploding or vanishing gradients. Additionally, it helps achieve more consistent and reliable performance across different datasets and models, making the training process more robust and effective.
+
+In the context of image datasets, calculating the mean and standard deviation involves considering the four dimensions of an image: B (Batch size), C (Channels, such as RGB), H (Height), and W (Width). These dimensions represent the entire dataset where multiple images are processed simultaneously.
+
+To compute the mean, the pixel values are averaged across all images in the batch, across all color channels, and across every pixel position (height and width). The same applies to the standard deviation, which measures how much the pixel values vary from the mean across these dimensions. This process ensures that the mean and standard deviation represent the overall characteristics of the dataset, accounting for variations in color and spatial information, and allowing for consistent normalization of all images in the dataset.
+
+**2. Observation**
+
+
+**3. Conclusion**
+
+A good model develops its predictive abilities by learning from a batch of data without overfitting to it. Overfitting occurs when the model becomes too closely tailored to the training data, memorizing the specific relationships between features and labels rather than understanding the underlying patterns. By avoiding this, the model can generalize its learning, meaning it applies what it has learned to new, unseen data. This generalization allows the model to make reliable predictions on future observations because it has learned the broader patterns that link features to labels, rather than just the specific examples it was trained on. This approach ensures the model remains flexible and effective across different datasets.
+Our model was successful in detecting and distinguishing the distinct traits of healthy and infected cherry leaves. In view of this the ML model could be further used to make predictions for further use.
+
+**Sources**:
+
+- [Hands-on Machine Learning with Scikit-Learn and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems](https://books.google.com.mt/books/about/Hands_on_Machine_Learning_with_Scikit_Le.html?id=I6qkDAEACAAJ&source=kp_book_description&redir_esc=y) by Aurélien Géron
+- [Powdery mildew: biology, epidemiology, and management of Podosphaera spp. of tree fruit](https://shop.bdspublishing.com/store/bds/detail/product/3-190-9781838798970)
+
+---
+### Hypothesis 2
+> `softmax` activation function performs better than `sigmoid` activation function for the CNN output layer.
+
+**1. Introduction**
+
+   1. Understand the Problem & Mathematical Functions
+
+The goal is to classify a cherry leaf into one of two distinct categories: healthy or infected. This represents a classification challenge, which can be interpreted as either a binary classification or multi-class classification. In binary classification, the leaf is either classified as healthy or not healthy, whereby in multi-class classification, where each outcome is assigned a single label from multiple classes, the leaf is either classified as healthy or infected.
+
+- Using Sigmoid Activation Function:
+
+The sigmoid activation function can be used effectively for this problem as it is designed for binary classification tasks. It provides an output probability between 0 and 1, which can be interpreted as the likelihood of the cherry leaf being in one of the two classes (healthy or infected). For this specific problem, sigmoid would output a single value representing the probability of the leaf being classified as "infected," with the complement representing "healthy." The model can then use a threshold (commonly 0.5) to decide the final classification. While sigmoid is well-suited for binary classification, it does not naturally handle scenarios where multiple classes could be present, but in this case with only two classes, it functions effectively.
+
+- Using Softmax Activation Function:
+
+Softmax is generally more appropriate for classification problems with multiple classes, even though it can be used for binary classification scenarios. Softmax provides a probability distribution across all classes, ensuring that the output probabilities sum to 1. In the context of binary classification, softmax would output two values, one for each class (healthy and infected), with the values summing to 1. This can be advantageous as it provides a clearer view of the relative probabilities for each class, rather than just a single probability with a threshold. Using softmax allows the model to scale naturally to problems with more than two classes if needed, providing flexibility for future extension or reclassification. For the current binary problem, softmax ensures that the probabilities are well-calibrated and interpretable in the context of multi-class classification principles.
+ 
+   2. Understand how to evaluate the performance
+   
+Learning curves are a valuable diagnostic tool for assessing and comparing the performance of machine learning algorithms, including the choice between softmax and sigmoid activation functions. During training, the model is iteratively exposed to the dataset for a specified number of epochs. An epoch is one complete pass through the training data. Tracking how the model's performance changes over epochs can reveal insights about its learning process and the effectiveness of the activation functions. The accuracy curve shows how the model’s classification performance improves over time for both training and validation sets. For binary classification (healthy vs. infected), this curve helps identify if the model is learning effectively and if the activation function is appropriate. The loss curve tracks the error between the model's predictions and the actual labels. A decreasing loss indicates that the model is learning and improving its predictions. It is crucial to monitor both training and validation loss to understand if the model is generalizing well.
+When evaluating learning curves:
+
+   - Training and Validation Loss: A good fit is indicated by both training and validation loss curves decreasing and stabilizing over epochs, with minimal gap between the final values. This suggests that the model is learning effectively and generalizing well to unseen data.
+   
+   - Accuracy Trends: Both training and validation accuracy should increase and converge towards similar values. If the validation accuracy is significantly lower than the training accuracy, this might indicate overfitting.
+
+If the learning curves with sigmoid show consistent improvement and convergence with minimal overfitting, it might be suitable. However, watch for issues like vanishing gradients or slow convergence. If using softmax, check if the learning curves demonstrate better convergence and stability. Softmax can provide clearer probabilities for classification and might perform better if it shows reduced validation loss and improved accuracy.
+
+In summary, by analyzing learning curves for both activation functions, you can determine which one better balances learning and generalization. The ideal activation function will show well-aligned training and validation loss and accuracy curves that stabilize with minimal discrepancy.
+  
+**2. Observation**
+
+```softmax``` showed less training/validation sets gap and more consistent learning rate compared to ```sigmoid```. 
+
+**3. Conclusion**
+
+For the purpose of this project, ```softmax``` activation function performed better than ```sigmoid```. 
+
+**Sources**:
+- [Hands-on Machine Learning with Scikit-Learn and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems](https://books.google.com.mt/books/about/Hands_on_Machine_Learning_with_Scikit_Le.html?id=I6qkDAEACAAJ&source=kp_book_description&redir_esc=y) by Aurélien Géron
+
+---
+### Hypothesis 3 
+> ```RGB``` images perform better than ```grayscale```  in terms of image classification performance. 
+
+**1. Introduction**
+
+RGB images generally outperform grayscale images in image classification tasks due to their richer feature set and enhanced detail capture. Unlike grayscale images, which only capture intensity information through a single channel, RGB images include three color channels—red, green, and blue—that provide more nuanced data. This additional color information allows models to detect subtle differences between objects, improving their ability to distinguish between classes. The increased dimensionality from RGB channels offers more data for learning, which enhances the model’s feature extraction and generalization capabilities. Color-specific features, such as patterns or markings, are often crucial for accurate classification, making RGB images particularly valuable for complex tasks. Research and benchmarks frequently show that models trained on RGB images achieve higher accuracy compared to those trained on grayscale images, especially in applications where color variations are essential for correct interpretation. Additionally, relying solely on grayscale might cause the model to overfit to structural features, potentially reducing generalization. Thus, the decision to convert depends on the specific classification task. <br/>
+
+**2. Observation**
+
+- The model was trained for 32 epochs without early stopping, specifically to test this hypothesis, and it exhibited overfitting in the final 10 epochs as anticipated.
+- Identical hyperparameters were used for both experiments.
+- RGB model demonstrated a smaller gap between training and validation sets and a more stable learning rate compared to the grayscale model. 
+
+**3. Conclusion**
+
+Although our dataset was significant in size, the RGB model performed marginally better than images converted using grayscale model. Particular consideration should be given if the company decides to increase the number of cherry trees, as opting for grayscale would save money and storage even though the RGB model proved to be more accurate.
+
+Sources:
+- [Building Machine Learning Pipelines](https://www.google.com.mt/books/edition/Building_Machine_Learning_Pipelines/H6_wDwAAQBAJ?hl=en&gbpv=0) by Hannes Hapke & Catherine Nelson
 
 
 ## Rationale for the Model
@@ -51,135 +142,142 @@ By meeting these requirements, the project will enable Farmy & Foods to maintain
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
-The business requirements of the project have been mapped to specific data visualization and machine learning (ML) tasks to ensure that the project's objectives are met effectively. Below is a detailed rationale for each business requirement and how it corresponds to the relevant tasks:
+### Business Requirement 1: Data Visualization 
+>The client is interested in being able to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
 
-### Business Requirement 1: Conduct a study to visually differentiate a healthy cherry leaf from one that contains powdery mildew.
-> Rationale: The client is interested in understanding the visual differences between healthy and infected cherry leaves. This requirement can be addressed through detailed data analysis and visualization techniques that highlight the key features of each class.
+- In order to address this business requirement:
+   1. We need to provide an interactive dashboard which is easily navigated by the user in order to understand the data.
+   2. We need to display the "mean" and "standard deviation" images for healthy and infected leaves.
+   3. We need to display the difference between average healthy and infected leaves.
+   4. We need to display an image montage for either healthy or infected cells.
 
-#### Data Visualization Tasks:
+### Business Requirement 2: Classification
+>The client is interested in employing a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis which is highly accurate.
 
-1) Average Image and Variability Study:
+- In order to address this business requirement:
+   1. We need to develop an accurate ML model to predict whether a cherry leaf is healthy or infected.
+   2. Our ML model needs to have a dashboard which enables the user to upload cherry leaf images through a widget and obtain a relative prediction statement, indicating whether the leaf is infected or not
 
-- Purpose: Generate average images for both healthy and powdery mildew leaves, and study their variability.
+### Business Requirement 3: Report
+>The client is interested obtaining predictions and review the analysis results through detailed reports. 
 
-- Visualization: Display the average images and variability heatmaps for each class to highlight common patterns and differences.
-
-2) Difference Between Average Images:
-
-- Purpose: Identify specific differences between healthy and mildew-affected leaves by subtracting the average healthy leaf image from the average mildew leaf image.
-
-- Visualization: Use a difference image to visualize areas of the leaf where the most significant differences occur.
-
-3) Image Montage:
-
-- Purpose: Create a montage of sample images from both classes.
-
-- Visualization: Display a grid of images showing healthy leaves and mildew-affected leaves side by side for easy comparison.
-
-#### ML Tasks:
-
-No direct ML task for this requirement as it focuses on visual analysis rather than predictive modeling.
-
-### Business Requirement 2: Predict if a cherry leaf is healthy or contains powdery mildew.
-> Rationale: The client needs an automated system to predict whether a cherry leaf is healthy or infected with powdery mildew. This requirement is fulfilled by developing an ML model that classifies leaf images into these two categories.
-
-#### Data Visualization Tasks:
-
-1) Model Performance Visualization:
-
-- Purpose: Visualize the model's learning curve (accuracy and loss over epochs) and the confusion matrix.
-
-- Visualization: Plot the learning curves for training and validation sets, and display the confusion matrix to understand the model's performance and areas for improvement.
-
-#### ML Tasks:
-
-1) Data Preparation:
-
-- Purpose: Prepare the dataset by preprocessing images, including resizing, normalization, and data augmentation.
-
-- ML Component: Ensures that the data is in a suitable format for training the model, increasing the robustness and accuracy of the predictions.
-
-2) Model Architecture Design and Training:
-
-- Purpose: Build and train a Convolutional Neural Network (CNN) to classify the images.
-
-- ML Component: The CNN model is specifically designed with an input layer, convolutional layers, fully connected layers, and an output layer to effectively capture the patterns associated with healthy and mildew-affected leaves.
-
-3) Hyperparameter Tuning:
-
-- Purpose: Optimize the model's performance by adjusting hyperparameters such as learning rate, number of filters, kernel size, and dropout rates.
-
-- ML Component: Ensures that the model meets the desired accuracy and generalizes well to new data.
-
-4) Model Evaluation:
-
-- Purpose: Evaluate the model's performance using accuracy, precision, recall, and F1 score.
-
-- ML Component: Validate the model's effectiveness in predicting healthy and mildew-affected leaves, ensuring it meets the performance criteria set by the client.
-
-### Business Requirement 3: Deliver a Dashboard to present the findings and enable predictions.
-> Rationale: The client requires a user-friendly dashboard to visualize the study results and interact with the prediction model.
-
-#### Dashboard Tasks:
-
-1) Summary Page:
-
-- Purpose: Provide an overview of the dataset, the business requirements, and the project's goals.
-
-- Dashboard Component: Text descriptions, dataset summary tables, and project objective outlines.
-
-
-2) Visual Differentiation Page:
-
-- Purpose: Display the results of the study that differentiates between healthy and infected leaves.
-
-- Dashboard Component: Includes average images, difference images, variability heatmaps, and image montages.
-
-
-3) Prediction Interface:
-
-- Purpose: Allow users to upload images and get predictions on whether a leaf is healthy or infected. 
-
-- Dashboard Component: File uploader widget, image display, prediction output, and downloadable results table.
-
-
-4) Hypothesis Validation Page:
-
-- Purpose: Outline the hypotheses tested and how they were validated.
-
-- Dashboard Component: Textual explanations and visual evidence supporting the hypothesis conclusions.
-
-
-5) Technical Model Performance Page:
-
-- Purpose: Provide detailed insights into the model’s performance, including training/validation accuracy and loss, confusion matrix, and classification report.
-
-- Dashboard Component: Interactive plots and detailed performance metrics.
+- In order to address this business requirement:
+   1. We need to develop a dashboard which enables the user to obtain a report with the predicted status from the ML predictions on new leaves after uploading images of cherry leaves.
 
 ## ML Business Case
 
+**Visit the Project Handbook on [Mildew Detector Wiki](https://github.com/JoelChan13/mildew-detector/wiki)**
+
+### Mildew Detector in Cherry Leaves
+- Farmy & Foods company's current approach at examining and identifying cherry leaves infected with powdery mildew is based on manual inspection, whereby farmers estimate to spend 30 minutes manually inspecting each tree. This lenghty process relies on the farmer's visual abilities and expertise to determine if the trees are healthy or infected, which at times may prove inaccurate or inconsistent since human subjectivity and human error cannot be ruled out.
+- In order to address this need, we need to provide farmers with a reliable alternative to detect powdery mildew which is not reliant on manual inspection, which can translate into an ML model able to predict if a leaf is healthy or infected with powdery milder, based on an image database provided by Farmy & Foods company.
+- The alternative can be provided using a supervised learning, multi-class, single-label, classification model, whereby a successful model provided an accuracy of 87% or above on the test set.
+- Following the upload of a cherry leaf image through the mildew detector, the model output flags the leaf through its respective category, which is either healthy or infected.
+- Training data to fit the model was provided by Farmy & Foody company and uploaded on Kaggle in an image dataset containing 4208 images of cherry leaves. 
+
 ## Dashboard Design
 
+### Page 1: Quick Project Summary
+- Quick Project Summary
+    - General Information:
+        - Cherry powdery mildew is a fungal disease caused by the pathogen Podosphaera clandestina, which primarily affects cherry trees. This disease thrives in warm, dry conditions and can spread rapidly, especially in humid environments. It typically infects the young leaves, shoots, and fruit of cherry trees, resulting in reduced fruit quality and yield. The mildew fungus lives on the surface of plant tissues and feeds on them by sending tiny filaments into the cells.
+        - Visual criteria used to detect infected leaves are Porraceous green lesions on either leaf surface which progresses to white or grayish powdery spots which develop in the infected area on leaves and fruits."
+- Project Dataset
+The available dataset contains 2104 healthy leaves and 2104 affected leaves individually photographed against a neutral background.
+- Business Requirements:
+    1. A comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
+    2. Implement a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis, ideally with an accuracy target of not less than 97%.
+    3. Develop an interactive dashboard that allows users to upload cherry leaf images, receive predictions, and review the analysis results. 
+- Link to project Readme.md file. 
+
+### Page 2: Cherry Leaves Visualizer
+This page fulfills the Business Requirement 1 by providing a comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
+- Checkbox 1 - Show the difference between average and variability images
+- Checkbox 2 - Show the difference between average images of infected and healthy leaves
+- Checkbox 3 - Image Montage
+- Link to project Readme.md file. 
+
+### Page 3: Powdery Mildew Detector
+- A link to download a dataset of infected and healthy leaves for testing for live prediction which can be found on [Kaggle](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves)
+- File uploader widget for users to upload multiple JPEG images; this will display the image, a visual representation of the prediction, the prediction statement and its probability.
+- Analysis report in table format and download button to produce it in csv format.
+- Link to project Readme.md file. 
+  
+### Page 4: Project Hypothesis and Validation
+- Explanation for project hypothesis including statement, explanation, validation and conclusion.
+- Link to project Readme.md file. 
+
+### Page 5: ML Performance Metrics
+- Image for labels distribution across train, validation, and test sets
+- Image for overall sets distribution
+- Image for classification report
+- Image for model performance - ROC curve
+- Image for model accuracy - Confusion matrix
+- Image for model performance - Accuracy & Losses of LSTM Model
+- Model Evaluation Result on Test Set
+
 ## CRISP-DM Process
+- CRISP-DM, which stands for Cross-Industry Standard Process for Data Mining, is a widely used methodology for data mining and data science projects. It provides a structured approach to planning and executing a data analysis project and consists of six phases:
+   1. Business Understanding: This initial phase focuses on understanding the project objectives and requirements from a business perspective. It involves defining the problem to be solved, setting project goals, and determining the success criteria. A deep understanding of the business context and objectives helps in designing a relevant data analysis strategy.
+   2. Data Understanding: In this phase, data is collected and an initial exploration is performed to understand its characteristics. This involves activities such as data collection, data description, data quality assessment, and identifying any data issues like missing values or outliers. The goal is to become familiar with the data and identify potential data quality problems.
+   3. Data Preparation: This phase involves preparing the data for modeling. It includes tasks such as cleaning the data, handling missing values, transforming variables, selecting relevant features, and creating new variables if necessary. Data preparation is crucial because the quality of the data directly impacts the performance of the models.
+   4. Modeling: In the modeling phase, various modeling techniques are selected and applied to the prepared data to create predictive models. This involves selecting the appropriate algorithms, setting parameters, and training the models. Often, multiple models are built and evaluated to determine which one performs best based on the project's objectives.
+   5. Evaluation: After building the models, the evaluation phase assesses the quality and validity of the models to ensure they meet the business objectives. It involves evaluating model performance using appropriate metrics, validating model assumptions, and considering whether the models effectively solve the business problem. If necessary, further refinement or additional data preparation might be performed.
+   6. Deployment: The final phase involves deploying the model into the production environment where it will be used to make real-world decisions. This could mean generating reports, integrating the model into existing systems, or simply presenting the results to stakeholders. Deployment also includes setting up monitoring and maintenance procedures to ensure the model continues to perform well over time.
+
+**Source**: [Development Methodologies for Big Data Analytics Systems](https://www.google.com.mt/books/edition/Development_Methodologies_for_Big_Data_A/h0jhEAAAQBAJ?hl=en&gbpv=0)
+
+- The CRISP-DM process is split up into sprints, and further divided into epics, which were documented using a Kanban Board provided by GitHub [@JoelChan13's Mildew Detector in Cherry Leaves Project](https://github.com/users/JoelChan13/projects/8/views/1). 
+- Kanban boards are important in CRISP-DM processes because they help manage and visualize the workflow of data mining and data science projects. Here’s how Kanban boards contribute to the efficiency and effectiveness of CRISP-DM:
+   1. Visualization of Tasks and Progress: Kanban boards provide a clear, visual representation of tasks across different stages of the CRISP-DM process. By using columns to represent phases such as "To Do," "In Progress", and "Done," teams can see at a glance where each task is in the workflow. This helps in tracking progress and identifying any bottlenecks or areas that need attention.
+   2. Improved Workflow Management: CRISP-DM is an iterative process, meaning that data science teams often need to revisit earlier phases based on findings from later stages. Kanban boards support this flexibility by allowing easy movement of tasks back and forth between columns. This ensures that all necessary steps are completed and that any needed revisions or refinements are tracked and managed efficiently.
+   3. Enhanced Communication and Collaboration: Kanban boards facilitate better communication among team members by making the status of tasks visible to everyone involved. This transparency ensures that all team members are on the same page regarding project progress, priorities, and responsibilities. It also encourages collaboration, as team members can quickly see where their input or assistance is needed.
+   4. Focus on Continuous Improvement: One of the key principles of Kanban is continuous improvement. By using a Kanban board, teams can regularly review the flow of work, identify inefficiencies or delays, and make adjustments to improve the process. This aligns well with the iterative nature of CRISP-DM, where learning from each phase can lead to enhancements in how subsequent phases are executed.
+   5. Adaptability to Changing Requirements: Data science projects often involve uncertainty and changing requirements as new insights are gained. Kanban boards are flexible and can easily adapt to these changes. New tasks can be added, priorities can be shifted, and tasks can be reassigned without disrupting the overall workflow, making them ideal for managing the dynamic environment of CRISP-DM projects.
+
+**Source**: [Kanban: Successful Evolutionary Change for Your Technology Business](https://www.google.com.mt/books/edition/Kanban/RJ0VUkfUWZkC?hl=en)
 
 ## Bugs
 
-- You will need to mention unfixed bugs and why they were unfixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable for consideration, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+### Unfixed Bug
+- Erratic image predictions were detected on certain occasions, whereby certain shadows and backgrounds ended up misleading the model into erratically classifying certain images as healthy or infected. In order to resolve this issue, the image normalization process could me retuned in order to ensure that shadows, glares and backgrounds would be taken into considerations, and countered accordingly.   
 
 ## Deployment
 
 ### Heroku
 
 - The App live link is: `https://YOUR_APP_NAME.herokuapp.com/`
-- Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
-- The project was deployed to Heroku using the following steps.
+- Set the runtime.txt Python version to a  stack currently supported version.
+- The project was deployed to Heroku using the following steps:
 
-1. Log in to Heroku and create an App
-2. At the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button Open App on the top of the page to access your App.
-6. If the slug size is too large, then add large files not required for the app to the .slugignore file.
+1. Create a `requirement.txt` file in GitHub, for Heroku to read, listing the dependencies the program needs in order to run.
+2. Set the `runtime.txt` Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
+3. Ensure that the recent changes to GitHub have been pushed
+4. Access your [Heroku account page](https://id.heroku.com/login) and create and deploy the app running the project. 
+5. Click on "CREATE NEW APP", give the app a unique name, and select an ideal geographical region. 
+6. Add `heroku/python` buildpack from the _Settings_ tab.
+7. From the _Deploy_ tab, choose GitHub as deployment method, and connect to GitHub by selecting the project's repository. 
+8. Select branch you want to deploy and click Deploy Branch.
+9. Choose to "Deploy Branch" from the _Manual Deploy_ section. 
+10. Wait for the logs to run while the dependencies are installed and the app is being built.
+11. The mock terminal is then ready and accessible from a link similar to `https://your-projects-name.herokuapp.com/`
+12. If the slug size is too large then add large files not required for the app to the `.slugignore` file.
+
+### Forking the Repository
+
+- By forking this GitHub repository, you create a duplicate of the original repository on your GitHub account, allowing you to view or modify it without impacting the original repository. The steps to fork the repository are as follows:
+
+1. Locate the [GitHub Repository](https://github.com/JoelChan13/mildew-detector) of this project and log into your GitHub account.
+2. Click on the "Fork" button, on the top right of the page.
+3. Choose a destination where to fork the repository.
+
+### Making a local clone
+
+- Cloning a repository downloads a complete copy of all the data in the repository from GitHub.com at that specific time, including every version of each file and folder in the project. The steps to clone a repository are as follows:
+
+1. Locate the [GitHub Repository](https://github.com/JoelChan13/mildew-detector) of this project and log into your GitHub account.
+2. Click on the "Code" button.
+3. Choose one of the available options: Clone with HTTPS, Open with Git Hub desktop, Download ZIP.
 
 ## Technologies Used
 
@@ -203,28 +301,29 @@ No direct ML task for this requirement as it focuses on visual analysis rather t
 - pandas 1.1.2          used to create/save as dataframe
 - matplotlib 3.3.1      used to plot the sets' distribution
 - keras 2.6.0           used to set model hyperparameters
-- plotly 5.12.0         used to plot model's learning curve 
+- plotly 4.12.0         used to plot model's learning curve 
 - seaborn 0.11.0        used to plot model's confusion matrix
-- streamlit             used to create and share project interface
+- protobuf==3.20        used to used to encode data into a compact binary format
 </pre>
 
 
 ## Credits
 
-- In this section, you need to reference where you got your content, media and from where you got extra help. It is common practice to use code from other repositories and tutorials. However, it is necessary to be very specific about these sources to avoid plagiarism.
-- You can break the credits section up into Content and Media, depending on what you have included in your project.
-
 ### Content
-
-- The text for the Home page was taken from Wikipedia Article A.
-- Instructions on how to implement form validation on the Sign-Up page were taken from [Specific YouTube Tutorial](https://www.youtube.com/).
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/).
+- The leaves dataset was linked from [Kaggle](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves) and created by [Code Institute](https://www.kaggle.com/codeinstitute)
+- The powdery mildew description was taken from [garden design](https://www.gardendesign.com/how-to/powdery-mildew.html) and [almanac](https://www.almanac.com/pest/powdery-mildew)
+- The [CRISP DM](https://www.datascience-pm.com/crisp-dm-2/) steps adopted in the [GitHub project](https://github.com/cla-cif/Cherry-Powdery-Mildew-Detector/projects?query=is%3Aopen) were modeled on [Introduction to CRISP-DM](https://www.ibm.com/docs/en/spss-modeler/saas?topic=guide-introduction-crisp-dm) articles from IBM.
 
 ### Media
+- The logo image was generated using [DALL·E 3](https://openai.com/index/dall-e-3/)
 
-- The photos used on the home and sign-up page are from This Open-Source site.
-- The images used for the gallery page were taken from this other open-source site.
+### Code 
+-  The template used for this project, along with jupyter notebooks for data collection and data visualisation were obtained from [Code Institute Walkthrough Project 1 - Malaria Detector](https://github.com/Code-Institute-Solutions/WalkthroughProject01).
+- The cherry powdery milew detector project compiled by Claudia Cifaldi was also used as a reference when producing the mildew detecor project [GitHub - Claudia Cifaldi](https://github.com/cla-cif/Cherry-Powdery-Mildew-Detector/tree/main).
 
-## Acknowledgements (optional)
+### Acknowledgements
 
-- Thank the people who provided support throughout this project.
+- Thanks to the Student Care & Tutor Assistance teams at [Code Institute](https://codeinstitute.net/global/) for their occasional inputs whenever I encountered any issues which I was unable to solve on my own.
+- I would also like to thank my mentor, Mr. Mo Shami, for his straight-forward approach, for encouraging me to challenge myself, and for sharing his knowledge in the field. 
+
+### Deployed version at []()

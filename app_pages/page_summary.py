@@ -28,7 +28,7 @@ def page_summary_body():
     st.success(
         f"The project has three business requirements:\n\n"
         f"1 - A comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.\n\n"
-        f"2 - Implement a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis, with an accuracy target of 97%. \n\n"
+        f"2 - Implement a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis, ideally with an accuracy target of not less than 97%. \n\n"
         f"3 - Develop an interactive dashboard that allows users to upload cherry leaf images, receive predictions, and review the analysis results."
         )
 

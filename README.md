@@ -15,7 +15,7 @@
 12. [Technologies Used](#technologies-used)
 13. [Credits](#credits)
 
-### Deployed version at [Mildew Detector]()
+### Deployed version at [Mildew Detector](https://p5-mildew-detector-13512f4dba8f.herokuapp.com/)
 
 ## Dataset Content
 
@@ -328,7 +328,7 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 
 ### Heroku
 
-- The App live link is: `https://YOUR_APP_NAME.herokuapp.com/`
+- The App live link is: `https://p5-mildew-detector-13512f4dba8f.herokuapp.com/`
 - Set the runtime.txt Python version to a  stack currently supported version.
 - The project was deployed to Heroku using the following steps:
 
@@ -408,4 +408,4 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 - Thanks to the Student Care & Tutor Assistance teams at [Code Institute](https://codeinstitute.net/global/) for their occasional inputs whenever I encountered any issues which I was unable to solve on my own.
 - I would also like to thank my mentor, Mr. Mo Shami, for his straight-forward approach, for encouraging me to challenge myself, and for sharing his knowledge in the field. 
 
-### Deployed version at []()
+### Deployed version at [Mildew Detector](https://p5-mildew-detector-13512f4dba8f.herokuapp.com/)

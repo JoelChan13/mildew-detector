@@ -2,30 +2,49 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 
-# Class to generate multiple Streamlit pages using an object oriented approach
 class MultiPage:
+    """
+    A class to generate Streamlit pages using an object-oriented approach.
+
+    Attributes:
+    pages (list): A list to store the pages of the app.
+    app_name (str): The name of the Streamlit app.
+    """
 
     def __init__(self, app_name) -> None:
-        # Initialize an empty list to store pages
+        """
+        Initializes MultiPage object with app & and sets page configuration.
+
+        Parameters:
+        app_name (str): The name of the Streamlit app.
+        """
         self.pages = []
         self.app_name = app_name
 
-        # Set the configuration for the Streamlit app page
         st.set_page_config(
             page_title=self.app_name,
             page_icon="🍃")
 
-    # Add a new page to the app
     def add_page(self, title, func) -> None:
+        """
+        Adds a new page to the app.
+
+        Parameters:
+        title (str): The title of the page.
+        func (function): The function that renders the content of the page.
+        """
         self.pages.append({"title": title, "function": func})
 
-    # Method to run the app and display the selected page
     def run(self):
-        # Set the main title of the app to the app name
+        """
+        Runs the app and displays the selected page.
+
+        The method displays the app title,
+        shows a sidebar with the available pages,
+        and calls the function of the selected page to display its content.
+        """
         st.title(self.app_name)
-        # Display titles of pages and returns the selected page
         page = st.sidebar.radio(
             'Menu', self.pages,
             format_func=lambda page: page['title'])
-        # Call the function of the selected page to display its content
         page['function']()

@@ -15,7 +15,7 @@ def page_leaves_visualiser_body():
     Displays the 'Leaves Visualiser' page,
     providing information on differentiating healthy cherry leaves
     from those infected with powdery mildew.
-    It includes options to visualize differences between average
+    It includes options to visualise differences between average
     & variability images,as well as montages of selected labels.
     """
     st.write("### Leaves Visualiser")

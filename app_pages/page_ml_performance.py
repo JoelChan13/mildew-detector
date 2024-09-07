@@ -10,7 +10,7 @@ def page_ml_performance_metrics():
     Displays a summary of the dataset's distribution,
     the model's performance metrics,
     and a detailed explanation of the results.
-    It includes visualizations such as pie charts,
+    It includes visualisations such as pie charts,
     classification reports, ROC curves, and confusion matrices.
     """
     version = 'v1'
@@ -22,7 +22,7 @@ def page_ml_performance_metrics():
 
     st.write("### Images Distribution per Set & Label ")
 
-    labels_distribution = plt.imread(f"outputs/alfa/number_leaves_sets.png")
+    labels_distribution = plt.imread(f"outputs/v1/number_leaves_sets.png")
     st.image(labels_distribution, caption='Labels Distribution on Train, Validation and Test Sets')
 
     # Display the image showing the overall sets distribution
@@ -63,7 +63,7 @@ def page_ml_performance_metrics():
         f" the performance of a binary classification model."
         f"It plots the True Positive Rate (sensitivity) against the"
         f" False Positive Rate (1 - specificity)"
-        f" at various threshold settings. The ROC curve helps visualize"
+        f" at various threshold settings. The ROC curve helps visualise"
         f" how well a model distinguishes between two classes.\n\n"
         f"A model with a curve that rises quickly towards the top-left"
         f" corner of the graph is considered to have good performance,"
@@ -92,7 +92,7 @@ def page_ml_performance_metrics():
         f" are indicative of a good model.")
 
     # Display the model performance image
-    model_perf = plt.imread(f"outputs/alfa/model_history.png")
+    model_perf = plt.imread(f"outputs/v1/model_history.png")
     st.image(model_perf, caption='Model Performance')
 
     st.warning(

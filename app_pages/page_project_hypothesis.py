@@ -53,7 +53,7 @@ def page_project_hypothesis_body():
         f"In view of this, using sigmoid can lead to predictions where the sum"
         f" of probabilities across all classes is not equal to 1, which can be"
         f" problematic for multi-class classification.\n\n"
-        f"Instead, the softmax function is preferred as it normalizes the "
+        f"Instead, the softmax function is preferred as it normalises the "
         f"output probabilities across all classes so that they sum to 1, "
         f"providing a clear prediction for the single label. Should the user "
         f"still opt to use sigmoid, each class would be treated as a separate "

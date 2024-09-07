@@ -6,7 +6,7 @@
 3. [Hypothesis and Validation](#hypothesis-and-validation)
 4. [Rationale for the Model](#rationale-for-the-model)
 5. [Trial and Error](#trial-and-error)
-6. [The Rationale to Map the Business Requirements to the Data Visualizations and ML Tasks](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
+6. [The Rationale to Map the Business Requirements to the Data Visualisations and ML Tasks](#the-rationale-to-map-the-business-requirements-to-the-data-visualisations-and-ml-tasks)
 7. [ML Business Case](#ml-business-case)
 8. [Dashboard Design](#dashboard-design)
 9. [CRISP DM Process](#crisp-dm-process)
@@ -53,11 +53,11 @@ We believe cherry leaves infected with powdery mildew have distinct visual trait
 
 - Understand the Problem & Mathematical Functions
 
-Normalizing images in a dataset before training a neural network is crucial for several reasons. First, it ensures that all pixel values are on a similar scale, typically between 0 and 1 or -1 and 1, which helps the model converge faster during training. Without normalization, the network might struggle with varying scales of pixel values, leading to inefficient learning. It also prevents any particular feature from dominating the training process, ensuring that the model pays equal attention to all features. Normalization improves numerical stability, reducing the risk of exploding or vanishing gradients. Additionally, it helps achieve more consistent and reliable performance across different datasets and models, making the training process more robust and effective.
+Normalising images in a dataset before training a neural network is crucial for several reasons. First, it ensures that all pixel values are on a similar scale, typically between 0 and 1 or -1 and 1, which helps the model converge faster during training. Without normalisation, the network might struggle with varying scales of pixel values, leading to inefficient learning. It also prevents any particular feature from dominating the training process, ensuring that the model pays equal attention to all features. Normalisation improves numerical stability, reducing the risk of exploding or vanishing gradients. Additionally, it helps achieve more consistent and reliable performance across different datasets and models, making the training process more robust and effective.
 
 In the context of image datasets, calculating the mean and standard deviation involves considering the four dimensions of an image: B (Batch size), C (Channels, such as RGB), H (Height), and W (Width). These dimensions represent the entire dataset where multiple images are processed simultaneously.
 
-To compute the mean, the pixel values are averaged across all images in the batch, across all color channels, and across every pixel position (height and width). The same applies to the standard deviation, which measures how much the pixel values vary from the mean across these dimensions. This process ensures that the mean and standard deviation represent the overall characteristics of the dataset, accounting for variations in color and spatial information, and allowing for consistent normalization of all images in the dataset.
+To compute the mean, the pixel values are averaged across all images in the batch, across all color channels, and across every pixel position (height and width). The same applies to the standard deviation, which measures how much the pixel values vary from the mean across these dimensions. This process ensures that the mean and standard deviation represent the overall characteristics of the dataset, accounting for variations in color and spatial information, and allowing for consistent normalisation of all images in the dataset.
 
 **2. Observation**
 
@@ -174,7 +174,7 @@ Pooling is a technique used in neural networks to reduce the dimensionality of f
 
 Output activation functions are crucial in machine learning and deep neural networks as they determine how the model's predictions are scaled and interpreted. For classification tasks, the choice of activation function impacts the model's ability to output probabilities and make accurate predictions.
 
-Softmax is used in multiclass classification problems. It converts raw scores (logits) into probabilities by exponentiating the scores and normalizing them so that they sum to 1. This makes it ideal for distinguishing between multiple classes, as it provides a probability distribution across all classes, helping the model to choose the most likely class. Softmax also ensures that the outputs are normalized, which can stabilize training and improve performance in complex classification tasks.
+Softmax is used in multiclass classification problems. It converts raw scores (logits) into probabilities by exponentiating the scores and normalising them so that they sum to 1. This makes it ideal for distinguishing between multiple classes, as it provides a probability distribution across all classes, helping the model to choose the most likely class. Softmax also ensures that the outputs are normalised, which can stabilize training and improve performance in complex classification tasks.
 
 Sigmoid, on the other hand, is used in binary classification. It outputs probabilities between 0 and 1 for a single class, making it suitable for problems where each instance belongs to only one of two classes. However, in a multiclass setting, using sigmoid would require a separate output neuron for each class, each producing an independent probability, which may not effectively capture the mutual exclusivity of the classes.
 
@@ -224,7 +224,7 @@ The use of accuracy is particularly relevant when the class distribution is bala
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
-### Business Requirement 1: Data Visualization 
+### Business Requirement 1: Data Visualisation 
 >The client is interested in being able to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
 
 - In order to address this business requirement:
@@ -272,7 +272,7 @@ The available dataset contains 2104 healthy leaves and 2104 affected leaves indi
     3. Develop an interactive dashboard that allows users to upload cherry leaf images, receive predictions, and review the analysis results. 
 - Link to project Readme.md file. 
 
-### Page 2: Cherry Leaves Visualizer
+### Page 2: Cherry Leaves Visualiser
 This page fulfills the Business Requirement 1 by providing a comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
 - Checkbox 1 - Show the difference between average and variability images
 - Checkbox 2 - Show the difference between average images of infected and healthy leaves
@@ -310,8 +310,8 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 **Source**: [Development Methodologies for Big Data Analytics Systems](https://www.google.com.mt/books/edition/Development_Methodologies_for_Big_Data_A/h0jhEAAAQBAJ?hl=en&gbpv=0)
 
 - The CRISP-DM process is split up into sprints, and further divided into epics, which were documented using a Kanban Board provided by GitHub [@JoelChan13's Mildew Detector in Cherry Leaves Project](https://github.com/users/JoelChan13/projects/8/views/1). 
-- Kanban boards are important in CRISP-DM processes because they help manage and visualize the workflow of data mining and data science projects. Here’s how Kanban boards contribute to the efficiency and effectiveness of CRISP-DM:
-   1. Visualization of Tasks and Progress: Kanban boards provide a clear, visual representation of tasks across different stages of the CRISP-DM process. By using columns to represent phases such as "To Do," "In Progress", and "Done," teams can see at a glance where each task is in the workflow. This helps in tracking progress and identifying any bottlenecks or areas that need attention.
+- Kanban boards are important in CRISP-DM processes because they help manage and visualise the workflow of data mining and data science projects. Here’s how Kanban boards contribute to the efficiency and effectiveness of CRISP-DM:
+   1. Visualisation of Tasks and Progress: Kanban boards provide a clear, visual representation of tasks across different stages of the CRISP-DM process. By using columns to represent phases such as "To Do," "In Progress", and "Done," teams can see at a glance where each task is in the workflow. This helps in tracking progress and identifying any bottlenecks or areas that need attention.
    2. Improved Workflow Management: CRISP-DM is an iterative process, meaning that data science teams often need to revisit earlier phases based on findings from later stages. Kanban boards support this flexibility by allowing easy movement of tasks back and forth between columns. This ensures that all necessary steps are completed and that any needed revisions or refinements are tracked and managed efficiently.
    3. Enhanced Communication and Collaboration: Kanban boards facilitate better communication among team members by making the status of tasks visible to everyone involved. This transparency ensures that all team members are on the same page regarding project progress, priorities, and responsibilities. It also encourages collaboration, as team members can quickly see where their input or assistance is needed.
    4. Focus on Continuous Improvement: One of the key principles of Kanban is continuous improvement. By using a Kanban board, teams can regularly review the flow of work, identify inefficiencies or delays, and make adjustments to improve the process. This aligns well with the iterative nature of CRISP-DM, where learning from each phase can lead to enhancements in how subsequent phases are executed.
@@ -322,7 +322,7 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 ## Bugs
 
 ### Unfixed Bug
-- Erratic image predictions were detected on certain occasions, whereby certain shadows and backgrounds ended up misleading the model into erratically classifying certain images as healthy or infected. In order to resolve this issue, the image normalization process could me retuned in order to ensure that shadows, glares and backgrounds would be taken into considerations, and countered accordingly.   
+- Erratic image predictions were detected on certain occasions, whereby certain shadows and backgrounds ended up misleading the model into erratically classifying certain images as healthy or infected. In order to resolve this issue, the image normalisation process could me retuned in order to ensure that shadows, glares and backgrounds would be taken into considerations, and countered accordingly.   
 
 ## Deployment
 

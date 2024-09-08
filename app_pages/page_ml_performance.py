@@ -92,7 +92,7 @@ def page_ml_performance_metrics():
         f" are indicative of a good model.")
 
     # Display the model performance image
-    model_perf = plt.imread(f"outputs/v1/model_history.png")
+    model_perf = plt.imread(f"outputs/{version}/model_history.png")
     st.image(model_perf, caption='Model Performance')
 
     st.warning(

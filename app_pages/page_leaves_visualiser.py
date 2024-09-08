@@ -41,7 +41,7 @@ def page_leaves_visualiser_body():
 
     version = 'v1'
 
-    if st.checkbox("Difference between average and variability image"):
+    if st.checkbox("Difference Between Average & Variability image"):
         """
         Displays the average and variability images of infected and
         healthy leaves if the checkbox is selected.
@@ -61,7 +61,7 @@ def page_leaves_visualiser_body():
         st.image(avg_uninfected, caption='Healthy Cherry Leaf - Average and Variability')
         st.write("---")
 
-    if st.checkbox("Differences between average infected and average healthy leaves"):
+    if st.checkbox("Differences Between Average Infected & Average Healthy Leaves"):
         """
         Displays the difference between the average
         images of infected and healthy leaves

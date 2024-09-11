@@ -1,6 +1,7 @@
 # ![Mildew Detector Logo](https://github.com/JoelChan13/mildew-detector/blob/main/readme_images/mildew_detector_logo.png)
 
 ## Table of Contents
+
 1. [Dataset Content](#dataset-content)
 2. [Business Requirements](#business-requirements)
 3. [Hypothesis and Validation](#hypothesis-and-validation)
@@ -36,15 +37,16 @@ By meeting these requirements, the project will enable Farmy & Foods to maintain
 ## Hypothesis and Validation
 
 1. **Hypothesis 1**: Visual Differentiation of Cherry Leaves - There are distinct visual differences between healthy cherry leaves and those affected by powdery mildew that can be identified through image analysis.
-   - __How to validate__: This hypothesis can be tested by conducting a study that involves analyzing average images, variability images, and creating image montages for both healthy and powdery mildew-affected leaves. If the differences are visually apparent and consistent, this would support the hypothesis. The analysis will include identifying specific visual markers or patterns that distinguish healthy leaves from those affected by powdery mildew.<br/>
+   - How to validate: This hypothesis can be tested by conducting a study that involves analyzing average images, variability images, and creating image montages for both healthy and powdery mildew-affected leaves. If the differences are visually apparent and consistent, this would support the hypothesis. The analysis will include identifying specific visual markers or patterns that distinguish healthy leaves from those affected by powdery mildew.<br/>
 
 2. **Hypothesis 2**: Comparison of Mathematical Functions - The `softmax` function performs better than the `sigmoid` function as an activation function for the CNN output layer.
-   - __How to validate__:  This hyptothesis can be tested by understanding the type of problem we are trying to solve, and training and comparing the models, modifying only the activation function in the output layer. This will enable us to identify which model produces more accurate results.<br/>
+   - How to validate:  This hyptothesis can be tested by understanding the type of problem we are trying to solve, and training and comparing the models, modifying only the activation function in the output layer. This will enable us to identify which model produces more accurate results.<br/>
 
 3. **Hypothesis 3**: ```RGB``` images perform better than ```grayscale```  in terms of image classification performance.
-   - __How to validate__: This hypothesis can be tested by training and comparing the models, modifying only the image colour, which will enable us to identify which model produces more accurate results, along with the margin of difference in accuracy.<br/>
+   - How to validate: This hypothesis can be tested by training and comparing the models, modifying only the image colour, which will enable us to identify which model produces more accurate results, along with the margin of difference in accuracy.<br/>
 
 ### Hypothesis 1
+
 > There are distinct visual differences between healthy cherry leaves and those affected by powdery mildew that can be identified through image analysis.
 
 **1. Introduction**
@@ -74,6 +76,7 @@ Our model was successful in detecting and distinguishing the distinct traits of 
 
 ---
 ### Hypothesis 2
+
 > `softmax` activation function performs better than `sigmoid` activation function for the CNN output layer.
 
 **1. Introduction**
@@ -89,14 +92,14 @@ The sigmoid activation function can be used effectively for this problem as it i
 - Using Softmax Activation Function:
 
 Softmax is generally more appropriate for classification problems with multiple classes, even though it can be used for binary classification scenarios. Softmax provides a probability distribution across all classes, ensuring that the output probabilities sum to 1. In the context of binary classification, softmax would output two values, one for each class (healthy and infected), with the values summing to 1. This can be advantageous as it provides a clearer view of the relative probabilities for each class, rather than just a single probability with a threshold. Using softmax allows the model to scale naturally to problems with more than two classes if needed, providing flexibility for future extension or reclassification. For the current binary problem, softmax ensures that the probabilities are well-calibrated and interpretable in the context of multi-class classification principles.
- 
+
    2. Understand how to evaluate the performance
-   
+
 Learning curves are a valuable diagnostic tool for assessing and comparing the performance of machine learning algorithms, including the choice between softmax and sigmoid activation functions. During training, the model is iteratively exposed to the dataset for a specified number of epochs. An epoch is one complete pass through the training data. Tracking how the model's performance changes over epochs can reveal insights about its learning process and the effectiveness of the activation functions. The accuracy curve shows how the model’s classification performance improves over time for both training and validation sets. For binary classification (healthy vs. infected), this curve helps identify if the model is learning effectively and if the activation function is appropriate. The loss curve tracks the error between the model's predictions and the actual labels. A decreasing loss indicates that the model is learning and improving its predictions. It is crucial to monitor both training and validation loss to understand if the model is generalizing well.
 When evaluating learning curves:
 
    - Training and Validation Loss: A good fit is indicated by both training and validation loss curves decreasing and stabilizing over epochs, with minimal gap between the final values. This suggests that the model is learning effectively and generalizing well to unseen data.
-   
+
    - Accuracy Trends: Both training and validation accuracy should increase and converge towards similar values. If the validation accuracy is significantly lower than the training accuracy, this might indicate overfitting.
 
 If the learning curves with sigmoid show consistent improvement and convergence with minimal overfitting, it might be suitable. However, watch for issues like vanishing gradients or slow convergence. If using softmax, check if the learning curves demonstrate better convergence and stability. Softmax can provide clearer probabilities for classification and might perform better if it shows reduced validation loss and improved accuracy.
@@ -112,6 +115,7 @@ In summary, by analyzing learning curves for both activation functions, you can 
 For the purpose of this project, ```softmax``` activation function performed better than ```sigmoid```. 
 
 **Sources**:
+
 - [Hands-on Machine Learning with Scikit-Learn and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems](https://books.google.com.mt/books/about/Hands_on_Machine_Learning_with_Scikit_Le.html?id=I6qkDAEACAAJ&source=kp_book_description&redir_esc=y) by Aurélien Géron
 
 ---
@@ -133,6 +137,7 @@ RGB images generally outperform grayscale images in image classification tasks d
 Although our dataset was significant in size, the RGB model performed marginally better than images converted using grayscale model. Particular consideration should be given if the company decides to increase the number of cherry trees, as opting for grayscale would save money and storage even though the RGB model proved to be more accurate.
 
 Sources:
+
 - [Building Machine Learning Pipelines](https://www.google.com.mt/books/edition/Building_Machine_Learning_Pipelines/H6_wDwAAQBAJ?hl=en&gbpv=0) by Hannes Hapke & Catherine Nelson
 
 
@@ -188,7 +193,8 @@ In the context of our project, applying a 20% dropout rate helps to mitigate ove
 
 If dropout layers were not included, the model might overfit to the training data, meaning it would perform well on the training set but poorly on new, unseen data. This is because the model might learn to memorize specific patterns in the training samples rather than learning general features applicable to the broader dataset. Consequently, the absence of dropout could lead to reduced model performance and less reliable predictions in real-world scenarios.
 
-**Source**: 
+**Source**:
+
 - [Deep Learning and Convolutional Neural Networks for Medical Imaging and Clinical Informatics](https://books.google.com.mt/books/about/Deep_Learning_and_Convolutional_Neural_N.html?id=hM2wDwAAQBAJ&source=kp_book_description&redir_esc=y) by - Le Lu, Xiaosong Wang, Gustavo Carneiro, Lin Yang
 - [Hands-on Machine Learning with Scikit-Learn and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems](https://books.google.com.mt/books/about/Hands_on_Machine_Learning_with_Scikit_Le.html?id=I6qkDAEACAAJ&source=kp_book_description&redir_esc=y) by Aurélien Géron
 
@@ -202,7 +208,8 @@ Dense (Fully Connected) Layers are used in the final stages of the model. They p
 
 The choice of using convolutional layers for feature extraction followed by dense layers for classification is effective because it allows the model to first capture and learn essential patterns from the data and then use these patterns to make precise classifications. This combination leverages the strengths of both types of layers: convolutional layers for spatial feature learning and dense layers for decision-making based on these features.
 
-**Source**: 
+**Source**:
+
 - [Convolutional Neural Networks: A Comprehensive Guide](https://medium.com/thedeephub/convolutional-neural-networks-a-comprehensive-guide-5cc0b5eae175) by - Jorgecardete
 
 ### Model Compilation
@@ -216,7 +223,8 @@ Accuracy is used as a metric to measure the proportion of correct predictions (w
 
 The use of accuracy is particularly relevant when the class distribution is balanced, as it indicates how often the model's predictions align with the true labels. However, in cases of imbalanced classes, where some classes are more frequent than others, accuracy might be misleading. In such scenarios, additional metrics like precision, recall, and F1-score might be used to gain a more nuanced understanding of model performance.
 
-**Source**: 
+**Source**:
+
 - [Hands-on Machine Learning with Scikit-Learn and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems](https://books.google.com.mt/books/about/Hands_on_Machine_Learning_with_Scikit_Le.html?id=I6qkDAEACAAJ&source=kp_book_description&redir_esc=y) by Aurélien Géron
 - [Keras Accuracy Metrics](https://keras.io/api/metrics/accuracy_metrics/#:~:text=metrics.,with%20which%20y_pred%20matches%20y_true%20.)
 
@@ -224,7 +232,8 @@ The use of accuracy is particularly relevant when the class distribution is bala
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
-### Business Requirement 1: Data Visualisation 
+### Business Requirement 1: Data Visualisation
+
 >The client is interested in being able to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
 
 - In order to address this business requirement:
@@ -234,6 +243,7 @@ The use of accuracy is particularly relevant when the class distribution is bala
    4. We need to display an image montage for either healthy or infected cells.
 
 ### Business Requirement 2: Classification
+
 >The client is interested in employing a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis which is highly accurate.
 
 - In order to address this business requirement:
@@ -241,6 +251,7 @@ The use of accuracy is particularly relevant when the class distribution is bala
    2. Our ML model needs to have a dashboard which enables the user to upload cherry leaf images through a widget and obtain a relative prediction statement, indicating whether the leaf is infected or not
 
 ### Business Requirement 3: Report
+
 >The client is interested obtaining predictions and review the analysis results through detailed reports. 
 
 - In order to address this business requirement:
@@ -251,6 +262,7 @@ The use of accuracy is particularly relevant when the class distribution is bala
 **Visit the Project Handbook on [Mildew Detector Wiki](https://github.com/JoelChan13/mildew-detector/wiki)**
 
 ### Mildew Detector in Cherry Leaves
+
 - Farmy & Foods company's current approach at examining and identifying cherry leaves infected with powdery mildew is based on manual inspection, whereby farmers estimate to spend 30 minutes manually inspecting each tree. This lenghty process relies on the farmer's visual abilities and expertise to determine if the trees are healthy or infected, which at times may prove inaccurate or inconsistent since human subjectivity and human error cannot be ruled out.
 - In order to address this need, we need to provide farmers with a reliable alternative to detect powdery mildew which is not reliant on manual inspection, which can translate into an ML model able to predict if a leaf is healthy or infected with powdery milder, based on an image database provided by Farmy & Foods company.
 - The alternative can be provided using a supervised learning, multi-class, single-label, classification model, whereby a successful model provided an accuracy of 87% or above on the test set.
@@ -260,6 +272,7 @@ The use of accuracy is particularly relevant when the class distribution is bala
 ## Dashboard Design
 
 ### Page 1: Quick Project Summary
+
 - Quick Project Summary
     - General Information:
         - Cherry powdery mildew is a fungal disease caused by the pathogen Podosphaera clandestina, which primarily affects cherry trees. This disease thrives in warm, dry conditions and can spread rapidly, especially in humid environments. It typically infects the young leaves, shoots, and fruit of cherry trees, resulting in reduced fruit quality and yield. The mildew fungus lives on the surface of plant tissues and feeds on them by sending tiny filaments into the cells.
@@ -270,9 +283,10 @@ The available dataset contains 2104 healthy leaves and 2104 affected leaves indi
     1. A comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
     2. Implement a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis, ideally with an accuracy target of not less than 97%.
     3. Develop an interactive dashboard that allows users to upload cherry leaf images, receive predictions, and review the analysis results. 
-- Link to project Readme.md file. 
+- Link to project Readme.md file.
 
 ### Page 2: Cherry Leaves Visualiser
+
 This page fulfills the Business Requirement 1 by providing a comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
 - Checkbox 1 - Show the difference between average and variability images
 - Checkbox 2 - Show the difference between average images of infected and healthy leaves
@@ -280,16 +294,19 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 - Link to project Readme.md file. 
 
 ### Page 3: Powdery Mildew Detector
+
 - A link to download a dataset of infected and healthy leaves for testing for live prediction which can be found on [Kaggle](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves)
 - File uploader widget for users to upload multiple JPEG images; this will display the image, a visual representation of the prediction, the prediction statement and its probability.
 - Analysis report in table format and download button to produce it in csv format.
 - Link to project Readme.md file. 
   
 ### Page 4: Project Hypothesis and Validation
+
 - Explanation for project hypothesis including statement, explanation, validation and conclusion.
 - Link to project Readme.md file. 
 
 ### Page 5: ML Performance Metrics
+
 - Image for labels distribution across train, validation, and test sets
 - Image for overall sets distribution
 - Image for classification report
@@ -299,7 +316,9 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 - Model Evaluation Result on Test Set
 
 ## CRISP-DM Process
+
 - CRISP-DM, which stands for Cross-Industry Standard Process for Data Mining, is a widely used methodology for data mining and data science projects. It provides a structured approach to planning and executing a data analysis project and consists of six phases:
+
    1. Business Understanding: This initial phase focuses on understanding the project objectives and requirements from a business perspective. It involves defining the problem to be solved, setting project goals, and determining the success criteria. A deep understanding of the business context and objectives helps in designing a relevant data analysis strategy.
    2. Data Understanding: In this phase, data is collected and an initial exploration is performed to understand its characteristics. This involves activities such as data collection, data description, data quality assessment, and identifying any data issues like missing values or outliers. The goal is to become familiar with the data and identify potential data quality problems.
    3. Data Preparation: This phase involves preparing the data for modeling. It includes tasks such as cleaning the data, handling missing values, transforming variables, selecting relevant features, and creating new variables if necessary. Data preparation is crucial because the quality of the data directly impacts the performance of the models.
@@ -322,6 +341,7 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 ## Bugs
 
 ### Unfixed Bug
+
 - Erratic image predictions were detected on certain occasions, whereby certain shadows and backgrounds ended up misleading the model into erratically classifying certain images as healthy or infected. In order to resolve this issue, the image normalisation process could me retuned in order to ensure that shadows, glares and backgrounds would be taken into considerations, and countered accordingly.   
 
 ## Deployment
@@ -364,6 +384,7 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 ## Technologies Used
 
 ### Platforms
+
 - [Heroku](https://en.wikipedia.org/wiki/Heroku) To deploy project
 - [Jupiter Notebook](https://jupyter.org/) Edit project code
 - [Kaggle](https://www.kaggle.com/) Download project datasets
@@ -371,10 +392,12 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 - [Gitpod](https://www.gitpod.io/) Used to write project code and push code to GitHub.
 
 ### Languages
+
 - [Python](https://www.python.org/)
 - [Markdown](https://www.markdownguide.org/getting-started/)
   
 ### Main Data Analysis and Machine Learning Libraries
+
 <pre>
 - tensorflow-cpu 2.6.0  used to create the model
 - numpy 1.19.2          used to convert to array 
@@ -392,14 +415,17 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 ## Credits
 
 ### Content
+
 - The leaves dataset was linked from [Kaggle](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves) and created by [Code Institute](https://www.kaggle.com/codeinstitute)
 - The powdery mildew description was taken from [garden design](https://www.gardendesign.com/how-to/powdery-mildew.html) and [almanac](https://www.almanac.com/pest/powdery-mildew)
 - The [CRISP DM](https://www.datascience-pm.com/crisp-dm-2/) steps adopted in the [GitHub project](https://github.com/cla-cif/Cherry-Powdery-Mildew-Detector/projects?query=is%3Aopen) were modeled on [Introduction to CRISP-DM](https://www.ibm.com/docs/en/spss-modeler/saas?topic=guide-introduction-crisp-dm) articles from IBM.
 
 ### Media
+
 - The logo image was generated using [DALL·E 3](https://openai.com/index/dall-e-3/)
 
-### Code 
+### Code
+
 -  The template used for this project, along with jupyter notebooks for data collection and data visualisation were obtained from [Code Institute Walkthrough Project 1 - Malaria Detector](https://github.com/Code-Institute-Solutions/WalkthroughProject01).
 - The cherry powdery milew detector project compiled by Claudia Cifaldi was also used as a reference when producing the mildew detecor project [GitHub - Claudia Cifaldi](https://github.com/cla-cif/Cherry-Powdery-Mildew-Detector/tree/main).
 

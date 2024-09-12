@@ -26,7 +26,7 @@ def page_ml_performance_metrics():
     st.image(labels_distribution, caption='Labels Distribution on Train, Validation and Test Sets')
 
     # Display the image showing the overall sets distribution
-    labels_distribution = plt.imread(f"outputs/{version}/sets_distribution_pie.png")
+    labels_distribution = plt.imread(f"outputs/{version}/sets_distribution_bar.png")
     st.image(labels_distribution, caption='Sets Distribution')
 
     st.warning(

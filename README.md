@@ -63,7 +63,10 @@ To compute the mean, the pixel values are averaged across all images in the batc
 
 **2. Observation**
 
+- Distinct visual traits differentiating a healthy cherry leaf from an infected cherry leaf visible in the below image montage
 
+![healthy](https://github.com/JoelChan13/mildew-detector/blob/main/readme_images/healthy_montage.png)
+![powderymildew](https://github.com/JoelChan13/mildew-detector/blob/main/readme_images/powdery_mildew_montage.png)
 
 **3. Conclusion**
 
@@ -131,6 +134,10 @@ In summary, by analyzing learning curves for both activation functions, you can 
       •	Sigmoid: The precision, recall, and f1-score for powdery_mildew are all 0, indicating that the sigmoid model fails to predict this class at all. This suggests that the model is simply guessing or defaulting to healthy for all cases.<br/>
       •	Softmax: The model using softmax correctly balances between the two classes, with an f1-score of 0.90 for healthy and 0.88 for powdery_mildew, showing that the model is predicting both classes effectively.<br/>
 
+- Loss/Accuracy of LSTM model trained using Softmax vs Loss/Accuracy of LSTM model trained using Sigmoid:
+![softmax_model](https://github.com/JoelChan13/mildew-detector/blob/main/streamlit_images/model_history_softmax_rgb.png)
+![sigmoid_model](https://github.com/JoelChan13/mildew-detector/blob/main/streamlit_images/model_history_sigmoid.png)
+
 **3. Conclusion**
 
 Opting for softmax over sigmoid in this case is better because it better handles the mutually exclusive nature of your classification problem, leading to more accurate and reliable predictions. The sigmoid model suffers from poor learning due to its inappropriate treatment of independent probabilities, while the softmax model improves training dynamics and outputs meaningful probabilities for each class.
@@ -150,12 +157,47 @@ RGB images generally outperform grayscale images in image classification tasks d
 
 **2. Observation**
 
+   1. Model Comparison<br/>
+      •	Model Architecture:<br/>
+         Both models share an identical architecture, consisting of three convolutional layers, followed by max pooling, a dense layer, dropout, and a final output layer with two classes (healthy or infected). The total number of trainable parameters is the same (3,715,234) for both tests.<br/>
+      •	Dataset and Training:<br/>
+         o	Both models are trained on the same dataset, which includes equal numbers of images of healthy and powdery mildew-infected leaves.<br/>
+         o	The only difference is that one model uses RGB images (3 channels), while the other uses grayscale images (1 channel).<br/>
 
+   2. Key Differences<br/>
+      •	Training Time:<br/>
+         o	RGB model: Training took about 215 seconds per epoch.<br/>
+         o	Grayscale model: Training was faster, taking approximately 188-191 seconds per epoch.<br/>
+
+   Reason:<br/>
+   RGB images have three color channels, while grayscale images have only one. The increased number of channels in RGB results in more computations during the forward and backward passes, leading to slightly longer training times.<br/>
+
+      •	Performance:<br/>
+         o	Accuracy RGB model: 89.45% test accuracy.<br/>
+         o	Accuracy Grayscale model: 95.73% test accuracy.<br/>
+         o	Loss RGB model: 0.2222 loss.<br/>
+         o	Loss Grayscale model: 0.1173 loss.<br/>
+         o	Precision, Recall, and F1-Score for RGB: Healthy: Precision 0.83, Recall 1.00, F1-Score 0.90.<br/>
+         o	Precision, Recall, and F1-Score for RGB: Powdery mildew: Precision 0.99, Recall 0.79, F1-Score 0.88.<br/>
+         o	Precision, Recall, and F1-Score for RGB: Accuracy: 89%.<br/>
+         o	Precision, Recall, and F1-Score for Grayscale: Healthy: Precision 0.94, Recall 0.98, F1-Score 0.96.<br/>
+         o	Precision, Recall, and F1-Score for Grayscale: Powdery mildew: Precision 0.98, Recall 0.94, F1-Score 0.96.<br/>
+         o	Precision, Recall, and F1-Score for Grayscale: Accuracy: 96%.<br/>
+
+- Loss/Accuracy of LSTM model for Grayscale & Loss/Accuracy of LSTM model for RGB:
+![Grayscale](https://github.com/JoelChan13/mildew-detector/blob/main/streamlit_images/model_history_grayscale.png)
+![RGB](https://github.com/JoelChan13/mildew-detector/blob/main/streamlit_images/model_history_softmax_rgb.png)
 
 **3. Conclusion**
 
+The grayscale model achieved a higher overall accuracy compared to the RGB model, indicating that it was better at classifying whether a cherry leaf was infected with powdery mildew or not.<br/>
+The grayscale model not only achieved better accuracy but also had a lower loss, meaning it was more confident and made fewer mistakes during classification.<br/>
+The grayscale model showed better precision and recall across both classes, which led to a higher F1-score. Notably, the grayscale model had a better balance between precision and recall for powdery mildew detection, while the RGB model had a higher precision for powdery mildew but lower recall (fewer infected leaves were correctly identified).<br/>
+Notwithstanding this, RGB images contain more detailed color information, which could help in scenarios where color variation is important for classification. RGB images provide more information than grayscale because they contain three color channels (red, green, and blue) instead of just one intensity channel. In the context of plant disease detection, subtle color differences between healthy and infected leaves may be present, even if they were not strongly leveraged in this particular case.<br/>
+If powdery mildew or other diseases cause slight color changes in leaves (e.g., a change in greenness or spotting), these changes might be better captured using RGB images. For example, chlorosis (yellowing of the leaves) might accompany powdery mildew, and an RGB model could potentially detect these subtle shifts in hue.<br/>
+Color data can sometimes help detect features that are not as easily distinguishable based on texture alone. For example, other types of leaf diseases or conditions might involve more color-based patterns that the RGB model could learn, whereas a grayscale model would miss out on this information.<br/>
 
-Sources:
+**Sources:**
 
 - [Building Machine Learning Pipelines](https://www.google.com.mt/books/edition/Building_Machine_Learning_Pipelines/H6_wDwAAQBAJ?hl=en&gbpv=0) by Hannes Hapke & Catherine Nelson
 

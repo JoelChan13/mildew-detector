@@ -111,25 +111,25 @@ In summary, by analyzing learning curves for both activation functions, you can 
 
 ```softmax``` showed less training/validation sets gap and more consistent learning rate compared to ```sigmoid```.
 
-   1. Nature of the Output Activation Function:
-      •	Sigmoid: The sigmoid activation function outputs values between 0 and 1 for each class independently. In binary classification, this is used to model probabilities for each class (e.g., class 0 or class 1). However, in your case where you have two mutually exclusive classes (healthy and powdery_mildew), using sigmoid treats these classes as independent, which is inappropriate because the presence of one implies the absence of the other. This can confuse the model.
-      •	Softmax: The softmax function outputs a probability distribution, where the probabilities for all classes sum to 1. In a two-class problem like yours, softmax is appropriate because it treats the classes as mutually exclusive, ensuring that the network only picks one class with the highest confidence.
+   1. Nature of the Output Activation Function:<br/>
+      •	Sigmoid: The sigmoid activation function outputs values between 0 and 1 for each class independently. In binary classification, this is used to model probabilities for each class (e.g., class 0 or class 1). However, in your case where you have two mutually exclusive classes (healthy and powdery_mildew), using sigmoid treats these classes as independent, which is inappropriate because the presence of one implies the absence of the other. This can confuse the model.<br/>
+      •	Softmax: The softmax function outputs a probability distribution, where the probabilities for all classes sum to 1. In a two-class problem like yours, softmax is appropriate because it treats the classes as mutually exclusive, ensuring that the network only picks one class with the highest confidence.<br/>
 
-   2. Impact on Model Training:
-      •	Sigmoid Output:
+   2. Impact on Model Training:<br/>
+      •	Sigmoid Output:<br/>
          o	Training Behavior: The sigmoid-based model fails to learn, as shown by the constant loss and accuracy (around 50%) during training and validation. The network gets stuck predicting 50% for both classes, which means it doesn't distinguish between them. This indicates that the model with sigmoid is not learning anything useful.
          o	Performance: The accuracy of the model using sigmoid is only 46.45%, with a precision, recall, and f1-score of 0 for the powdery_mildew class, which means the model predicts everything as healthy.
-      •	Softmax Output:
-         o	Training Behavior: The softmax-based model shows progressive learning, with accuracy improving across epochs, reaching 89.45% accuracy with a good balance between precision and recall.
-         o	Performance: The softmax-based model correctly predicts the majority of cases for both classes (healthy and powdery_mildew), with a high f1-score of 0.88 for powdery_mildew. This shows that the model is learning well, predicting the presence of powdery mildew more accurately.
+      •	Softmax Output:<br/>
+         o	Training Behavior: The softmax-based model shows progressive learning, with accuracy improving across epochs, reaching 89.45% accuracy with a good balance between precision and recall.<br/>
+         o	Performance: The softmax-based model correctly predicts the majority of cases for both classes (healthy and powdery_mildew), with a high f1-score of 0.88 for powdery_mildew. This shows that the model is learning well, predicting the presence of powdery mildew more accurately.<br/>
 
-   3. Mutual Exclusivity in Classification:
-      •	Sigmoid Misinterpretation: Since sigmoid treats each class independently, it is possible for both output nodes to predict high values (both near 1) or low values (both near 0). This would be incorrect in your case since a leaf can only be either healthy or infected. This leads to poor probability outputs, which you see in the 50.16% probability for healthy using sigmoid, implying no strong prediction for either class.
-      •	Softmax Proper Interpretation: Softmax ensures the sum of all class probabilities equals 1. This makes the model focus on differentiating between the two classes (healthy vs. powdery_mildew). In your model, the softmax output gives a high probability for one class over the other, such as the 98.84% probability for powdery_mildew, indicating the model is confident in its predictions.
+   3. Mutual Exclusivity in Classification:<br/>
+      •	Sigmoid Misinterpretation: Since sigmoid treats each class independently, it is possible for both output nodes to predict high values (both near 1) or low values (both near 0). This would be incorrect in your case since a leaf can only be either healthy or infected. This leads to poor probability outputs, which you see in the 50.16% probability for healthy using sigmoid, implying no strong prediction for either class.<br/>
+      •	Softmax Proper Interpretation: Softmax ensures the sum of all class probabilities equals 1. This makes the model focus on differentiating between the two classes (healthy vs. powdery_mildew). In your model, the softmax output gives a high probability for one class over the other, such as the 98.84% probability for powdery_mildew, indicating the model is confident in its predictions.<br/>
 
-   4. Classification Report Insights:
-      •	Sigmoid: The precision, recall, and f1-score for powdery_mildew are all 0, indicating that the sigmoid model fails to predict this class at all. This suggests that the model is simply guessing or defaulting to healthy for all cases.
-      •	Softmax: The model using softmax correctly balances between the two classes, with an f1-score of 0.90 for healthy and 0.88 for powdery_mildew, showing that the model is predicting both classes effectively.
+   4. Classification Report Insights:<br/>
+      •	Sigmoid: The precision, recall, and f1-score for powdery_mildew are all 0, indicating that the sigmoid model fails to predict this class at all. This suggests that the model is simply guessing or defaulting to healthy for all cases.<br/>
+      •	Softmax: The model using softmax correctly balances between the two classes, with an f1-score of 0.90 for healthy and 0.88 for powdery_mildew, showing that the model is predicting both classes effectively.<br/>
 
 **3. Conclusion**
 

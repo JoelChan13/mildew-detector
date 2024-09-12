@@ -64,6 +64,7 @@ To compute the mean, the pixel values are averaged across all images in the batc
 **2. Observation**
 
 
+
 **3. Conclusion**
 
 A good model develops its predictive abilities by learning from a batch of data without overfitting to it. Overfitting occurs when the model becomes too closely tailored to the training data, memorizing the specific relationships between features and labels rather than understanding the underlying patterns. By avoiding this, the model can generalize its learning, meaning it applies what it has learned to new, unseen data. This generalization allows the model to make reliable predictions on future observations because it has learned the broader patterns that link features to labels, rather than just the specific examples it was trained on. This approach ensures the model remains flexible and effective across different datasets.
@@ -108,18 +109,39 @@ In summary, by analyzing learning curves for both activation functions, you can 
   
 **2. Observation**
 
-```softmax``` showed less training/validation sets gap and more consistent learning rate compared to ```sigmoid```. 
+```softmax``` showed less training/validation sets gap and more consistent learning rate compared to ```sigmoid```.
+
+   1. Nature of the Output Activation Function:
+      •	Sigmoid: The sigmoid activation function outputs values between 0 and 1 for each class independently. In binary classification, this is used to model probabilities for each class (e.g., class 0 or class 1). However, in your case where you have two mutually exclusive classes (healthy and powdery_mildew), using sigmoid treats these classes as independent, which is inappropriate because the presence of one implies the absence of the other. This can confuse the model.
+      •	Softmax: The softmax function outputs a probability distribution, where the probabilities for all classes sum to 1. In a two-class problem like yours, softmax is appropriate because it treats the classes as mutually exclusive, ensuring that the network only picks one class with the highest confidence.
+
+   2. Impact on Model Training:
+      •	Sigmoid Output:
+         o	Training Behavior: The sigmoid-based model fails to learn, as shown by the constant loss and accuracy (around 50%) during training and validation. The network gets stuck predicting 50% for both classes, which means it doesn't distinguish between them. This indicates that the model with sigmoid is not learning anything useful.
+         o	Performance: The accuracy of the model using sigmoid is only 46.45%, with a precision, recall, and f1-score of 0 for the powdery_mildew class, which means the model predicts everything as healthy.
+      •	Softmax Output:
+         o	Training Behavior: The softmax-based model shows progressive learning, with accuracy improving across epochs, reaching 89.45% accuracy with a good balance between precision and recall.
+         o	Performance: The softmax-based model correctly predicts the majority of cases for both classes (healthy and powdery_mildew), with a high f1-score of 0.88 for powdery_mildew. This shows that the model is learning well, predicting the presence of powdery mildew more accurately.
+
+   3. Mutual Exclusivity in Classification:
+      •	Sigmoid Misinterpretation: Since sigmoid treats each class independently, it is possible for both output nodes to predict high values (both near 1) or low values (both near 0). This would be incorrect in your case since a leaf can only be either healthy or infected. This leads to poor probability outputs, which you see in the 50.16% probability for healthy using sigmoid, implying no strong prediction for either class.
+      •	Softmax Proper Interpretation: Softmax ensures the sum of all class probabilities equals 1. This makes the model focus on differentiating between the two classes (healthy vs. powdery_mildew). In your model, the softmax output gives a high probability for one class over the other, such as the 98.84% probability for powdery_mildew, indicating the model is confident in its predictions.
+
+   4. Classification Report Insights:
+      •	Sigmoid: The precision, recall, and f1-score for powdery_mildew are all 0, indicating that the sigmoid model fails to predict this class at all. This suggests that the model is simply guessing or defaulting to healthy for all cases.
+      •	Softmax: The model using softmax correctly balances between the two classes, with an f1-score of 0.90 for healthy and 0.88 for powdery_mildew, showing that the model is predicting both classes effectively.
 
 **3. Conclusion**
 
-For the purpose of this project, ```softmax``` activation function performed better than ```sigmoid```. 
+Opting for softmax over sigmoid in this case is better because it better handles the mutually exclusive nature of your classification problem, leading to more accurate and reliable predictions. The sigmoid model suffers from poor learning due to its inappropriate treatment of independent probabilities, while the softmax model improves training dynamics and outputs meaningful probabilities for each class.
 
 **Sources**:
 
 - [Hands-on Machine Learning with Scikit-Learn and TensorFlow: Concepts, Tools, and Techniques to Build Intelligent Systems](https://books.google.com.mt/books/about/Hands_on_Machine_Learning_with_Scikit_Le.html?id=I6qkDAEACAAJ&source=kp_book_description&redir_esc=y) by Aurélien Géron
 
 ---
-### Hypothesis 3 
+### Hypothesis 3
+
 > ```RGB``` images perform better than ```grayscale```  in terms of image classification performance. 
 
 **1. Introduction**
@@ -128,13 +150,10 @@ RGB images generally outperform grayscale images in image classification tasks d
 
 **2. Observation**
 
-- The model was trained for 32 epochs without early stopping, specifically to test this hypothesis, and it exhibited overfitting in the final 10 epochs as anticipated.
-- Identical hyperparameters were used for both experiments.
-- RGB model demonstrated a smaller gap between training and validation sets and a more stable learning rate compared to the grayscale model. 
+
 
 **3. Conclusion**
 
-Although our dataset was significant in size, the RGB model performed marginally better than images converted using grayscale model. Particular consideration should be given if the company decides to increase the number of cherry trees, as opting for grayscale would save money and storage even though the RGB model proved to be more accurate.
 
 Sources:
 
@@ -229,6 +248,14 @@ The use of accuracy is particularly relevant when the class distribution is bala
 - [Keras Accuracy Metrics](https://keras.io/api/metrics/accuracy_metrics/#:~:text=metrics.,with%20which%20y_pred%20matches%20y_true%20.)
 
 ## Trial and Error
+
+During the trial and error phase of this project, the primary objective was to confirm or deny the hypotheses stated in the hypothesis section and to identify the best hyperparameters for the mildew detector model. This approach allowed for systematic experimentation to fine-tune the model's architecture and parameters. The process was documented in the ModelEvaluation_Trials Jupyter notebook, where different trials were conducted by commenting in and out relevant code to focus on specific tests.
+
+A trial was conducted to test hypothesis #3, which claims that RGB images perform better than grayscale images in terms of image classification accuracy. To validate this hypothesis, models were trained and compared, modifying only the image color. This allowed for the identification of which model produced more accurate results and the margin of difference in accuracy between the two color formats.
+
+Another key focus of the trials was the evaluation of the softmax activation function, tested both with and without early stopping, and then compared to sigmoid, addressing hypothesis #2. Additionally, the model's performance was tested with one convolutional layer removed, helping to refine the convolution layer size.
+
+Optimizers AdaGrad & Adam were chosen as the optimizers during the trial and error phase. Adam was considered as a potential alternative, however, it did not emerge as the ideal optimizer for this project. Adam combines the advantages of two other popular optimizers, AdaGrad and RMSProp. It maintains a per-parameter learning rate and updates based on both the average of recent gradients (like AdaGrad) and the squared gradients (like RMSProp), making it adaptive and efficient for a wide range of tasks. Notwithstanding this, AdaGrad's ability to adapt learning rates to the data's characteristics made it more suitable for this model. AdaGrad adapts the learning rate based on the frequency of parameter updates, decreasing learning rates for frequently updated parameters and increasing them for less frequently updated ones. This adaptation helped efficiently navigate the loss landscape, particularly in the presence of sparse or noisy data.
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
@@ -342,7 +369,7 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 
 ### Unfixed Bug
 
-- Erratic image predictions were detected on certain occasions, whereby certain shadows and backgrounds ended up misleading the model into erratically classifying certain images as healthy or infected. In order to resolve this issue, the image normalisation process could me retuned in order to ensure that shadows, glares and backgrounds would be taken into considerations, and countered accordingly.   
+- Erratic image predictions were detected on certain occasions, whereby certain shadows and backgrounds ended up misleading the model into erratically classifying certain images as healthy or infected. In order to resolve this issue, the image normalisation process could me retuned in order to ensure that shadows, glares and backgrounds would be taken into considerations, and countered accordingly.
 
 ## Deployment
 
@@ -432,6 +459,6 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 ### Acknowledgements
 
 - Thanks to the Student Care & Tutor Assistance teams at [Code Institute](https://codeinstitute.net/global/) for their occasional inputs whenever I encountered any issues which I was unable to solve on my own.
-- I would also like to thank my mentor, Mr. Mo Shami, for his straight-forward approach, for encouraging me to challenge myself, and for sharing his knowledge in the field. 
+- I would also like to thank my mentor, Mr. Mo Shami, for his straight-forward approach, for encouraging me to challenge myself, and for sharing his knowledge in the field.
 
 ### Deployed version at [Mildew Detector](https://p5-mildew-detector-13512f4dba8f.herokuapp.com/)

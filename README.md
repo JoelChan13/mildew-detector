@@ -336,7 +336,9 @@ Optimizers AdaGrad & Adam were chosen as the optimizers during the trial and err
 - In order to address this need, we need to provide farmers with a reliable alternative to detect powdery mildew which is not reliant on manual inspection, which can translate into an ML model able to predict if a leaf is healthy or infected with powdery milder, based on an image database provided by Farmy & Foods company.
 - The alternative can be provided using a supervised learning, multi-class, single-label, classification model, whereby a successful model provided an accuracy of 87% or above on the test set.
 - Following the upload of a cherry leaf image through the mildew detector, the model output flags the leaf through its respective category, which is either healthy or infected.
-- Training data to fit the model was provided by Farmy & Foody company and uploaded on Kaggle in an image dataset containing 4208 images of cherry leaves. 
+- Training data to fit the model was provided by Farmy & Foody company and uploaded on Kaggle in an image dataset containing 4208 images of cherry leaves.
+
+![MildewDetector](https://github.com/JoelChan13/mildew-detector/blob/main/readme_images/mildew_detector.png)
 
 ## Dashboard Design
 
@@ -404,6 +406,8 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
    3. Enhanced Communication and Collaboration: Kanban boards facilitate better communication among team members by making the status of tasks visible to everyone involved. This transparency ensures that all team members are on the same page regarding project progress, priorities, and responsibilities. It also encourages collaboration, as team members can quickly see where their input or assistance is needed.
    4. Focus on Continuous Improvement: One of the key principles of Kanban is continuous improvement. By using a Kanban board, teams can regularly review the flow of work, identify inefficiencies or delays, and make adjustments to improve the process. This aligns well with the iterative nature of CRISP-DM, where learning from each phase can lead to enhancements in how subsequent phases are executed.
    5. Adaptability to Changing Requirements: Data science projects often involve uncertainty and changing requirements as new insights are gained. Kanban boards are flexible and can easily adapt to these changes. New tasks can be added, priorities can be shifted, and tasks can be reassigned without disrupting the overall workflow, making them ideal for managing the dynamic environment of CRISP-DM projects.
+
+![KanbanBoard](https://github.com/JoelChan13/mildew-detector/blob/main/readme_images/kanban_board.png)
 
 **Source**: [Kanban: Successful Evolutionary Change for Your Technology Business](https://www.google.com.mt/books/edition/Kanban/RJ0VUkfUWZkC?hl=en)
 

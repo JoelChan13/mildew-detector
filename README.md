@@ -417,6 +417,16 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 
 - Erratic image predictions were detected on certain occasions, whereby certain shadows and backgrounds ended up misleading the model into erratically classifying certain images as healthy or infected. In order to resolve this issue, the image normalisation process could me retuned in order to ensure that shadows, glares and backgrounds would be taken into considerations, and countered accordingly.
 
+## Testing
+
+### Validator Testing
+- Testing was done through PEP8 linter and the result was satisfactory
+
+![PEP8 Validation]( )
+
+#### Functional Testing
+
+
 ## Deployment
 
 ### Heroku

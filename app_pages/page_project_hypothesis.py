@@ -68,6 +68,11 @@ def page_project_hypothesis_body():
     st.warning(
         f"```softmax``` function performed better than ```sigmoid```"
     )
+    model_perf_softmax = plt.imread(f"streamlit_images/model_history_softmax_rgb.png")
+    st.image(model_perf_softmax, caption='LSTM Loss/Accuracy Performance - Softmax RGB') 
+    model_perf_sigmoid = plt.imread(f"streamlit_images/model_history_sigmoid.png")
+    st.image(model_perf_sigmoid, caption='LSTM Loss/Accuracy Performance - Sigmoid')
+    
 
     st.write("### Hypothesis 3 & Validation")
 
@@ -92,12 +97,16 @@ def page_project_hypothesis_body():
         f" classification task."
     )
     st.warning(
-        f"Although our dataset was significant in size, ```RGB``` images"
-        f" performed marginally better than ```grayscale``` images."
+        f"Although ```Grayscale``` images"
+        f" performed marginally better than ```RGB``` images."
         f"  Particular consideration should be given if the company"
         f" decides to increase number of cherry trees, as opting for grayscale"
-        f"  would save money & storage even if ```RGB``` is more accurate."
+        f"  would save money & storage even if ```RGB``` may present certain advantages."
     )
+    model_perf_rgb = plt.imread(f"streamlit_images/model_history_softmax_rgb.png")
+    st.image(model_perf_rgb, caption='LSTM Loss/Accuracy Performance - Softmax RGB')
+    model_perf_gray = plt.imread(f"streamlit_images/model_history_grayscale.png")
+    st.image(model_perf_gray, caption='LSTM Loss/Accuracy Performance - Grayscale') 
 
     st.write(
         f"For additional information, please visit and **read** the "

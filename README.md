@@ -26,13 +26,41 @@ Dataset Source From [Kaggle](https://www.kaggle.com/datasets/codeinstitute/cherr
 
 ## Business Requirements
 
-The primary objective of this project is to develop a Machine Learning system that aids Farmy & Foods in addressing the issue of powdery mildew affecting their cherry plantations. Currently, the process is manual verification if a given cherry tree contains powdery mildew. An employee spends around 30 minutes in each tree, taking a few samples of tree leaves and verifying visually if the leaf tree is healthy or has powdery mildew. If there is powdery mildew, the employee applies a specific compound to kill the fungus. The time spent applying this compound is 1 minute. Due to this fact, manually inspecting all plants is not scalable, the client has outlined the following specific business requirements:
+The primary objective of this project is to develop a Machine Learning system that aids Farmy & Foods in addressing the issue of powdery mildew affecting their cherry plantations. Currently, the process is manual verification if a given cherry tree contains powdery mildew. An employee spends around 30 minutes in each tree, taking a few samples of tree leaves and verifying visually if the leaf tree is healthy or has powdery mildew. If there is powdery mildew, the employee applies a specific compound to kill the fungus. The time spent applying this compound is 1 minute. Due to this fact, manually inspecting all plants is not scalable, the client has outlined the following specific business requirements as listed down in the [project wiki](https://github.com/JoelChan13/mildew-detector/wiki/Handbook:-Mildew-Detection-in-Cherry-Leaves):
 
 1. Visual Differentiation: Conduct a comprehensive study to visually differentiate between healthy cherry leaves and those infected with powdery mildew.
 2. Predictive Modeling: Implement a predictive model capable of identifying whether a cherry leaf is healthy or contains powdery mildew based on image analysis, ideally with an accuracy target of not less than 97%.
 3. Interactive Dashboard: Develop an interactive dashboard that allows users to upload cherry leaf images, receive predictions, and review the analysis results.
 
-By meeting these requirements, the project will enable Farmy & Foods to maintain product quality and meet market demands effectively through large-scale automated detection.
+By meeting these requirements, the project will enable Farmy & Foods to maintain product quality and meet market demands effectively through large-scale automated detection. Business Requirements were mapped out as user stories since they help in breaking down complex features into manageable tasks and allow for better planning and communication within a team.
+
+### **User Stories**
+
+* As a **user**, I can **upload images of cherry leaves**, so that I can **receive predictions on whether the leaves are healthy or infected with powdery mildew**.
+
+* As a **user**, I can **see real-time predictions for each uploaded image**, so that I can **immediately know the health status of the cherry leaves**.
+
+* As a **user**, I can **upload multiple images at once**, so that I can **efficiently process several cherry leaves and save time**.
+
+* As a **user**, I can **view a summary table of all uploaded images and their prediction results**, so that I can **easily review the predictions for all my images in one place**.
+
+* As a **user**, I can **download a table of the image names and their corresponding prediction results**, so that I can **keep a record of the health status of the cherry leaves for reporting or further analysis**.
+
+* As a **user**, I can **see a summary of the project and its dataset**, so that I **understand the context and scope of the leaf health predictions**.
+
+* As a **user**, I can **access the study findings on how to visually differentiate healthy leaves from powdery mildew-infected ones**, so that I can **understand the visual cues used by the model**.
+
+* As a **user**, I can **view the technical details of the model's performance (e.g., accuracy, precision)**, so that I can **assess the reliability of the predictions**.
+
+* As a **user**, I can **see a visual comparison of healthy and infected leaves**, so that I can **understand the differences between them**.
+
+* As a **user**, I can **obtain a reliable model to predict if a cherry leaf is healthy or contains powdery mildew**, so that I can **automate the detection process**.
+
+* As a **user**, I can **ensure the model's predictions are highly accurate (at least 97%)**, so that I can **trust its results in identifying mildew in cherry leaves**.
+
+* As a **user**, I can **use the system to analyse multiple leaves in a short amount of time**, so that I can **scale the mildew detection process across large plantations efficiently**.
+
+* As a **user**, I can **automate the detection of powdery mildew in cherry leaves**, so that **I no longer have to manually inspect each tree**.
 
 ## Hypothesis and Validation
 

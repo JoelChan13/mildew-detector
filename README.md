@@ -34,34 +34,6 @@ The primary objective of this project is to develop a Machine Learning system th
 
 By meeting these requirements, the project will enable Farmy & Foods to maintain product quality and meet market demands effectively through large-scale automated detection. Business Requirements were mapped out as user stories since they help in breaking down complex features into manageable tasks and allow for better planning and communication within a team.
 
-### **User Stories**
-
-* As a **user**, I can **upload images of cherry leaves**, so that I can **receive predictions on whether the leaves are healthy or infected with powdery mildew**.
-
-* As a **user**, I can **see real-time predictions for each uploaded image**, so that I can **immediately know the health status of the cherry leaves**.
-
-* As a **user**, I can **upload multiple images at once**, so that I can **efficiently process several cherry leaves and save time**.
-
-* As a **user**, I can **view a summary table of all uploaded images and their prediction results**, so that I can **easily review the predictions for all my images in one place**.
-
-* As a **user**, I can **download a table of the image names and their corresponding prediction results**, so that I can **keep a record of the health status of the cherry leaves for reporting or further analysis**.
-
-* As a **user**, I can **see a summary of the project and its dataset**, so that I **understand the context and scope of the leaf health predictions**.
-
-* As a **user**, I can **access the study findings on how to visually differentiate healthy leaves from powdery mildew-infected ones**, so that I can **understand the visual cues used by the model**.
-
-* As a **user**, I can **view the technical details of the model's performance (e.g., accuracy, precision)**, so that I can **assess the reliability of the predictions**.
-
-* As a **user**, I can **see a visual comparison of healthy and infected leaves**, so that I can **understand the differences between them**.
-
-* As a **user**, I can **obtain a reliable model to predict if a cherry leaf is healthy or contains powdery mildew**, so that I can **automate the detection process**.
-
-* As a **user**, I can **ensure the model's predictions are highly accurate (at least 97%)**, so that I can **trust its results in identifying mildew in cherry leaves**.
-
-* As a **user**, I can **use the system to analyse multiple leaves in a short amount of time**, so that I can **scale the mildew detection process across large plantations efficiently**.
-
-* As a **user**, I can **automate the detection of powdery mildew in cherry leaves**, so that **I no longer have to manually inspect each tree**.
-
 ## Hypothesis and Validation
 
 1. **Hypothesis 1**: Visual Differentiation of Cherry Leaves - There are distinct visual differences between healthy cherry leaves and those affected by powdery mildew that can be identified through image analysis.
@@ -223,7 +195,7 @@ The grayscale model not only achieved better accuracy but also had a lower loss,
 The grayscale model showed better precision and recall across both classes, which led to a higher F1-score. Notably, the grayscale model had a better balance between precision and recall for powdery mildew detection, while the RGB model had a higher precision for powdery mildew but lower recall (fewer infected leaves were correctly identified).<br/>
 Notwithstanding this, RGB images contain more detailed color information, which could help in scenarios where color variation is important for classification. RGB images provide more information than grayscale because they contain three color channels (red, green, and blue) instead of just one intensity channel. In the context of plant disease detection, subtle color differences between healthy and infected leaves may be present, even if they were not strongly leveraged in this particular case.<br/>
 If powdery mildew or other diseases cause slight color changes in leaves (e.g., a change in greenness or spotting), these changes might be better captured using RGB images. For example, chlorosis (yellowing of the leaves) might accompany powdery mildew, and an RGB model could potentially detect these subtle shifts in hue.<br/>
-Color data can sometimes help detect features that are not as easily distinguishable based on texture alone. For example, other types of leaf diseases or conditions might involve more color-based patterns that the RGB model could learn, whereas a grayscale model would miss out on this information.<br/>
+Colour data can sometimes help detect features that are not as easily distinguishable based on texture alone. For example, other types of leaf diseases or conditions might involve more color-based patterns that the RGB model could learn, whereas a grayscale model would miss out on this information.<br/>
 
 **Sources:**
 
@@ -354,6 +326,35 @@ Optimizers AdaGrad & Adam were chosen as the optimizers during the trial and err
 - In order to address this business requirement:
    1. We need to develop a dashboard which enables the user to obtain a report with the predicted status from the ML predictions on new leaves after uploading images of cherry leaves.
 
+**User Stories**
+
+* As a **user**, I can **upload images of cherry leaves**, so that I can **receive predictions on whether the leaves are healthy or infected with powdery mildew**.
+
+* As a **user**, I can **see real-time predictions for each uploaded image**, so that I can **immediately know the health status of the cherry leaves**.
+
+* As a **user**, I can **upload multiple images at once**, so that I can **efficiently process several cherry leaves and save time**.
+
+* As a **user**, I can **view a summary table of all uploaded images and their prediction results**, so that I can **easily review the predictions for all my images in one place**.
+
+* As a **user**, I can **download a table of the image names and their corresponding prediction results**, so that I can **keep a record of the health status of the cherry leaves for reporting or further analysis**.
+
+* As a **user**, I can **see a summary of the project and its dataset**, so that I **understand the context and scope of the leaf health predictions**.
+
+* As a **user**, I can **access the study findings on how to visually differentiate healthy leaves from powdery mildew-infected ones**, so that I can **understand the visual cues used by the model**.
+
+* As a **user**, I can **view the technical details of the model's performance (e.g., accuracy, precision)**, so that I can **assess the reliability of the predictions**.
+
+* As a **user**, I can **see a visual comparison of healthy and infected leaves**, so that I can **understand the differences between them**.
+
+* As a **user**, I can **obtain a reliable model to predict if a cherry leaf is healthy or contains powdery mildew**, so that I can **automate the detection process**.
+
+* As a **user**, I can **ensure the model's predictions are highly accurate (at least 97%)**, so that I can **trust its results in identifying mildew in cherry leaves**.
+
+* As a **user**, I can **use the system to analyse multiple leaves in a short amount of time**, so that I can **scale the mildew detection process across large plantations efficiently**.
+
+* As a **user**, I can **automate the detection of powdery mildew in cherry leaves**, so that **I no longer have to manually inspect each tree**.
+
+
 ## ML Business Case
 
 **Visit the Project Handbook on [Mildew Detector Wiki](https://github.com/JoelChan13/mildew-detector/wiki)**
@@ -444,16 +445,25 @@ This page fulfills the Business Requirement 1 by providing a comprehensive study
 ### Unfixed Bug
 
 - Erratic image predictions were detected on certain occasions, whereby certain shadows and backgrounds ended up misleading the model into erratically classifying certain images as healthy or infected. In order to resolve this issue, the image normalisation process could me retuned in order to ensure that shadows, glares and backgrounds would be taken into considerations, and countered accordingly.
+- twemoji.maxcdn.com/2/72x72/1f343.png:1 Failed to load resource: net::ERR_NAME_NOT_RESOLVED caused by the imported code from template.
 
 ## Testing
 
 ### Validator Testing
-- Testing was done through PEP8 linter and the result was satisfactory
+- Testing was done through CI Python Linter and the result was satisfactory.
 
-![PEP8 Validation]( )
+![CI PEP8 Validation](https://pep8ci.herokuapp.com/ )
 
 #### Functional Testing
-
+| Action  | Expected Outcome  | Pass/Fail |
+| :------------ |:---------------:| -----:|
+| Click on menu sidebar bar to view all pages and access them| Displays other pages and opens up page when clicked                           |    Pass |
+| Access quick project summary to get an overview of the project | Displays the general information, Project Dataset, Business Requirements  |    Pass |
+| Click on README link at the bottom of the pages | Redirects user to the project README page                                                |    Pass |
+| Click on tickbox buttons to display content | Displays content related to the respective button                                            |    Pass |
+| Create image montage | Create a random image montage based on the selected choice                                                          |    Pass |
+| Upload image in mildew detector widget | Load image in the widget & predict if leaf is infected or healthy & produce a downloadable report |    Pass |
+| Click on Download Report after image analysis | Downloads the image analysis report in csv format                                          |    Pass |
 
 ## Deployment
 
